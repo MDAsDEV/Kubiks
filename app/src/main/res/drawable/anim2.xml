@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:oneshot="true">
+    <item android:drawable="@drawable/kubikitwoo" android:duration="70" />
+    <item android:drawable="@drawable/kubikitwot" android:duration="70" />
+    <item android:drawable="@drawable/kubikitwoth" android:duration="70" />
+    <item android:drawable="@drawable/kubikitwofo" android:duration="70" />
+</animation-list>

@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Kubiks</string>
+    <string name="count_dice">Количество кубиков:</string>
+    <string name="oneone">TODO</string>
+    <string name="twotwo">TODO</string>
+    <string name="back">Назад</string>
+    <string name="back_first">TODO</string>
+    <string name="back_button_first">TODO</string>
+    <string name="second_back_button">TODO</string>
+    <string name="imgviewone">TODO</string>
+    <string name="onedice">TODO</string>
+</resources>
