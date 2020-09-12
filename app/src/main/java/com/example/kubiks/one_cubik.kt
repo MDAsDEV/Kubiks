@@ -6,11 +6,13 @@ import android.graphics.drawable.AnimationDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.widget.ImageButton
 import kotlinx.android.synthetic.main.activity_one_cubik.*
 import kotlin.random.Random
+import android.util.Log.i as i1
 
 class one_cubik : AppCompatActivity() {
     var was = false
@@ -25,7 +27,6 @@ class one_cubik : AppCompatActivity() {
                         MotionEvent.ACTION_DOWN -> animation1_1()//Do Something
                         MotionEvent.ACTION_UP -> animation1_2()
                     }
-
                     return v?.onTouchEvent(event) ?: true
                 }
             })
@@ -110,6 +111,9 @@ class one_cubik : AppCompatActivity() {
                 )
             }
             was = false
-        }
+
+    }
 
 }
+
+
