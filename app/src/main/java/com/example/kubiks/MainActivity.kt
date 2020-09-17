@@ -164,7 +164,7 @@ class MainActivity : AppCompatActivity() {
             was = true
             val imageView2 = findViewById(R.id.two_dices) as ImageView
             imageView2.setImageDrawable(null)
-            imageView2.setBackgroundResource(R.drawable.anim)
+            imageView2.setBackgroundResource(R.drawable.anim2_2)
             val animationDrawable2 = imageView2.background as AnimationDrawable
             if (!animationDrawable2.isRunning) {
 
