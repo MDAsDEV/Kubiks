@@ -1,18 +1,22 @@
 package com.example.kubiks
+
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.Color.alpha
 import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
+import android.view.animation.AnimationUtils
 import android.widget.ImageButton
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -41,8 +45,7 @@ class MainActivity : AppCompatActivity() {
             button_id.setOnTouchListener(object : View.OnTouchListener {
                 override fun onTouch(v: View?, event: MotionEvent?): Boolean {
                     when (event?.action){
-                        MotionEvent.ACTION_DOWN -> animation1_1()//Do Something
-                        MotionEvent.ACTION_UP -> animation1_2()
+                        MotionEvent.ACTION_DOWN -> scale_test()//Do Something
                     }
 
                     return v?.onTouchEvent(event) ?: true
@@ -83,6 +86,13 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    fun scale_test(){
+        val image: ImageView = findViewById(R.id.one_dice)
+        val animation =
+            AnimationUtils.loadAnimation(this, R.anim.scale_test)
+        image.startAnimation(animation)
+        go_to_one()
+    }
     fun animation1_1() {
         counter_plus()
         if (was_first_screen > 1) {
@@ -161,6 +171,7 @@ class MainActivity : AppCompatActivity() {
 
     fun animation2_2() {
         if (was_first_screen > 1) {
+            Log.i("TAG", "animation2_2")
             was = true
             val imageView2 = findViewById(R.id.two_dices) as ImageView
             imageView2.setImageDrawable(null)
@@ -172,8 +183,9 @@ class MainActivity : AppCompatActivity() {
                 for (i in 0 until animationDrawable2.numberOfFrames) {
                     totalFrameDuration2 += animationDrawable2.getDuration(i)
                 }
-
+                Log.i("", totalFrameDuration2.toString())
                 animationDrawable2.start()
+                Log.i("Condition", "Started")
                 Handler().postDelayed(
                     Runnable { animationDrawable2.stop() },
                     totalFrameDuration2.toLong()
