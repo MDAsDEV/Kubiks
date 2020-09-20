@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
             button_id.setOnTouchListener(object : View.OnTouchListener {
                 override fun onTouch(v: View?, event: MotionEvent?): Boolean {
                     when (event?.action){
-                        MotionEvent.ACTION_DOWN -> scale_test()//Do Something
+                        MotionEvent.ACTION_DOWN -> scale_one_dice()//Do Something
                     }
 
                     return v?.onTouchEvent(event) ?: true
@@ -57,8 +57,7 @@ class MainActivity : AppCompatActivity() {
             button_id2.setOnTouchListener(object : View.OnTouchListener {
                 override fun onTouch(v: View?, event: MotionEvent?): Boolean {
                     when (event?.action){
-                        MotionEvent.ACTION_DOWN -> animation2_1()//Do Something
-                        MotionEvent.ACTION_UP -> animation2_2()
+                        MotionEvent.ACTION_DOWN -> scale_two_dices()
                     }
 
                     return v?.onTouchEvent(event) ?: true
@@ -86,117 +85,34 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun scale_test(){
-        val image: ImageView = findViewById(R.id.one_dice)
-        val animation =
-            AnimationUtils.loadAnimation(this, R.anim.scale_test)
-        image.startAnimation(animation)
-        go_to_one()
-    }
-    fun animation1_1() {
+    fun scale_one_dice(){
         counter_plus()
         if (was_first_screen > 1) {
             was = true
-            val imageView = findViewById(R.id.one_dice) as ImageView
-            imageView.setImageDrawable(null)
-            imageView.setBackgroundResource(R.drawable.anim)
-            val animationDrawable = imageView.background as AnimationDrawable
-            if (!animationDrawable.isRunning) {
-
-                var totalFrameDuration = 0
-                for (i in 0 until animationDrawable.numberOfFrames) {
-                    totalFrameDuration += animationDrawable.getDuration(i)
-                }
-
-                animationDrawable.start()
-                Handler().postDelayed(
-                    Runnable { animationDrawable.stop() },
-                    totalFrameDuration.toLong()
-                )
-            }
-            was = false
-        }
-    }
-
-
-    fun animation1_2() {
-        if (was_first_screen > 1) {
-            was = true
-            val imageView = findViewById(R.id.one_dice) as ImageView
-            imageView.setImageDrawable(null)
-            imageView.setBackgroundResource(R.drawable.anim2)
-            val animationDrawable = imageView.background as AnimationDrawable
-            if (!animationDrawable.isRunning) {
-
-                var totalFrameDuration = 0
-                for (i in 0 until animationDrawable.numberOfFrames) {
-                    totalFrameDuration += animationDrawable.getDuration(i)
-                }
-
-                animationDrawable.start()
-                Handler().postDelayed(
-                    Runnable { animationDrawable.stop() },
-                    totalFrameDuration.toLong()
-                )
-            }
-            was = false
+            val image: ImageView = findViewById(R.id.one_dice)
+            val animation_zoom =
+                AnimationUtils.loadAnimation(this, R.anim.scale_zoom)
+            image.startAnimation(animation_zoom)
+            val animation_less = AnimationUtils.loadAnimation(this, R.anim.scale_less)
+            image.startAnimation(animation_less)
             go_to_one()
+            was = false
         }
     }
-
-    fun animation2_1() {
+    fun scale_two_dices(){
         counter_plus()
         if (was_first_screen > 1) {
             was = true
-            val imageView2 = findViewById(R.id.two_dices) as ImageView
-            imageView2.setImageDrawable(null)
-            imageView2.setBackgroundResource(R.drawable.anim2)
-            val animationDrawable2 = imageView2.background as AnimationDrawable
-            if (!animationDrawable2.isRunning) {
-
-                var totalFrameDuration2 = 0
-                for (i in 0 until animationDrawable2.numberOfFrames) {
-                    totalFrameDuration2 += animationDrawable2.getDuration(i)
-                }
-
-                animationDrawable2.start()
-                Handler().postDelayed(
-                    Runnable { animationDrawable2.stop() },
-                    totalFrameDuration2.toLong()
-                )
-            }
-            was = false
-        }
-    }
-
-    fun animation2_2() {
-        if (was_first_screen > 1) {
-            Log.i("TAG", "animation2_2")
-            was = true
-            val imageView2 = findViewById(R.id.two_dices) as ImageView
-            imageView2.setImageDrawable(null)
-            imageView2.setBackgroundResource(R.drawable.anim2_2)
-            val animationDrawable2 = imageView2.background as AnimationDrawable
-            if (!animationDrawable2.isRunning) {
-
-                var totalFrameDuration2 = 0
-                for (i in 0 until animationDrawable2.numberOfFrames) {
-                    totalFrameDuration2 += animationDrawable2.getDuration(i)
-                }
-                Log.i("", totalFrameDuration2.toString())
-                animationDrawable2.start()
-                Log.i("Condition", "Started")
-                Handler().postDelayed(
-                    Runnable { animationDrawable2.stop() },
-                    totalFrameDuration2.toLong()
-                )
-            }
-            was = false
+            val image: ImageView = findViewById(R.id.two_dices)
+            val animation_zoom =
+                AnimationUtils.loadAnimation(this, R.anim.scale_zoom)
+            image.startAnimation(animation_zoom)
+            val animation_less = AnimationUtils.loadAnimation(this, R.anim.scale_less)
+            image.startAnimation(animation_less)
             go_to_two()
+            was = false
         }
     }
-
-
     override fun onPause() { //Сохранение в настройках
         super.onPause()
 
