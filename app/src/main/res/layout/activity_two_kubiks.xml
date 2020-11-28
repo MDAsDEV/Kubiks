@@ -39,7 +39,21 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.904"
         app:srcCompat="@drawable/playbutton" />
-
+    <ImageButton
+        android:id="@+id/setbutton"
+        android:layout_width="106dp"
+        android:layout_height="83dp"
+        android:adjustViewBounds="true"
+        android:background="@null"
+        android:contentDescription="@string/setbut"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.009"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.138"
+        app:srcCompat="@drawable/settings" />
     <ImageView
         android:id="@+id/imageViewdown"
         android:layout_width="wrap_content"
@@ -54,8 +68,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/imgviewone"
+        android:visibility="visible"
+        app:srcCompat="@drawable/diceuth"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp"
-        app:srcCompat="@drawable/diceuth" />
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
