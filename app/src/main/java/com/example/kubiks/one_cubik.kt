@@ -18,7 +18,6 @@ import kotlin.random.Random
 
 class one_cubik : AppCompatActivity() {
     var was = false
-    //commit
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
