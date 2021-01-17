@@ -48,6 +48,10 @@ class two_kubiks : AppCompatActivity() {
         }
 
     }
+    fun go_to_settings(view: View){
+        val settings_activity = Intent(this, Settings::class.java)
+        startActivity(settings_activity)
+    }
 
     fun go_back(){
         val back_activity = Intent(this, MainActivity::class.java)
@@ -166,5 +170,6 @@ class two_kubiks : AppCompatActivity() {
         })
         was = false
     }
+
 }
 

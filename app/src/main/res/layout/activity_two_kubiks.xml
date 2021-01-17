@@ -9,6 +9,18 @@
     tools:ignore="ExtraText">
 
     <ImageButton
+        android:layout_width="134dp"
+        android:layout_height="112dp"
+        android:layout_marginBottom="600dp"
+        android:onClick="go_to_settings"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.942"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/settings"
+        />
+
+    <ImageButton
         android:id="@+id/bbutton"
         android:layout_width="81dp"
         android:layout_height="63dp"
