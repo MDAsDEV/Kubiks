@@ -4,13 +4,11 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import android.graphics.Color.alpha
-import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
-import android.os.Handler
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
+import android.view.WindowManager
 import android.view.animation.AnimationUtils
 import android.widget.ImageButton
 import android.widget.ImageView
@@ -30,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         prefs =
             getSharedPreferences("settings", Context.MODE_PRIVATE)
-        val start_phone = findViewById(R.id.imageView3) as ImageView;
+        val start_phone = findViewById(R.id.click) as ImageView;
         start_phone.setOnTouchListener(object : View.OnTouchListener {
             override fun onTouch(v: View?, event: MotionEvent?): Boolean {
                 when (event?.action){
@@ -68,7 +66,7 @@ class MainActivity : AppCompatActivity() {
     fun counter_plus(){
         was_first_screen += 1 // Изменяем число при нажатии на экран
         if (was_first_screen > 0) {
-            val start_phone = findViewById(R.id.imageView3) as ImageView;
+            val start_phone = findViewById(R.id.dark_phone) as ImageView;
             start_phone.isVisible = false // Делаем нашу ImageView (которая является подсказкой куда тыкать на экране) невидимой
         }
     }
@@ -127,7 +125,7 @@ class MainActivity : AppCompatActivity() {
 
         }
         if (was_first_screen > 0) {
-            val start_phone = findViewById(R.id.imageView3) as ImageView;
+            val start_phone = findViewById(R.id.dark_phone) as ImageView;
             start_phone.isVisible = false // Делаем нашу ImageButton (которая является подсказкой куда тыкать на экране) невидимой
         }
 

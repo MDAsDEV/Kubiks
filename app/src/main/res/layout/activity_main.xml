@@ -1,58 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fonchiko"
+    android:background="@drawable/light_phone_without_anything"
     tools:context=".MainActivity">
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="537dp"
-        android:layout_height="829dp"
-        android:alpha="1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.634"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.775"
-        app:srcCompat="@drawable/start_phone" />
 
+    <ImageView
+        android:id="@+id/dark_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleX="10"
+        android:scaleY="10"
+        app:srcCompat="@drawable/phone_without"
+        ></ImageView>
+    <ImageView
+        android:id="@+id/click"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:adjustViewBounds="true"
+        android:background="@null"
+        android:cropToPadding="true"
+        app:srcCompat="@drawable/click_buttons_to_start" />
+    <View
+        android:id="@+id/invisible_view_quarter"
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:layout_alignParentRight="true"
+        android:visibility="invisible"
+        ></View>
+
+
+    <ImageView
+        android:id="@+id/one_only"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/strelka_left"
+        android:layout_toRightOf="@id/invisible_view"
+        app:srcCompat="@drawable/light_1_dice" ></ImageView>
+    <View
+        android:id="@+id/invisible_view"
+        android:layout_width="1dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginLeft="-50dp"
+        android:layout_marginTop="30dp"
+        android:layout_height="1dp"
+        android:layout_centerHorizontal="true"
+        android:visibility="invisible" />
     <ImageButton
         android:id="@+id/one_dice"
         android:layout_width="wrap_content"
-        android:layout_height="223dp"
+        android:layout_height="wrap_content"
+        android:scaleX="0.85"
+        android:scaleY="0.85"
+        android:layout_marginTop="25dp"
+        android:layout_toLeftOf="@id/invisible_view"
         android:adjustViewBounds="true"
         android:background="@null"
-        android:contentDescription="@string/oneone"
         android:scaleType="fitCenter"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.192"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.226"
         app:srcCompat="@drawable/kubikone" />
+
+    <ImageView
+        android:id="@+id/light_2_dices_write"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_alignParentBottom="true"
+
+        android:layout_marginRight="10dp"
+        android:layout_toLeftOf="@id/invisible_view_bottom"
+        android:adjustViewBounds="true"
+        app:srcCompat="@drawable/light_2_dices"></ImageView>
 
     <ImageButton
         android:id="@+id/two_dices"
         android:layout_width="wrap_content"
-        android:layout_height="249dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/click"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="-30dp"
+        android:layout_marginTop="-3dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginBottom="0dp"
+        android:layout_toRightOf="@id/light_2_dices_write"
         android:adjustViewBounds="true"
         android:background="@null"
         android:contentDescription="@string/twotwo"
         android:scaleType="fitCenter"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.827"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.798"
         app:srcCompat="@drawable/kubikitwo" />
 
 
+    <View
+        android:id="@+id/invisible_view_bottom"
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:visibility="invisible" />
+    <View
+        android:id="@+id/invisible_view_center"
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:layout_centerVertical="true"
+        android:visibility="invisible"
+        ></View>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/click"
+        android:layout_above="@id/light_2_dices_write"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="8dp"
+        android:adjustViewBounds="true"
+        android:layout_toLeftOf="@id/two_dices"
+        app:srcCompat="@drawable/strelka1"></ImageView>
+
+    <ImageView
+        android:id="@+id/strelka_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/click"
+        android:layout_marginRight="10dp"
+        android:layout_toRightOf="@id/one_dice"
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/strelka2"></ImageView>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+</RelativeLayout>
