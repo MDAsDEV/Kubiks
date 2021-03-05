@@ -8,22 +8,31 @@
     android:background="@drawable/backgroundsecw"
     tools:context=".two_kubiks"
     tools:ignore="ExtraText">
-
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleY="0.7"
+        android:scaleX="0.7"
+        android:layout_marginRight="-15dp"
+        android:adjustViewBounds="true"
+        android:layout_alignParentRight="true"
+        android:background="@null"
+        app:srcCompat="@drawable/settings"
+        ></ImageButton>
     <ImageButton
         android:id="@+id/bbutton"
-        android:layout_width="81dp"
-        android:layout_height="63dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:adjustViewBounds="true"
         android:background="@null"
-        android:contentDescription="@string/back_button_first"
+        android:contentDescription="@string/second_back_button"
         android:scaleType="fitCenter"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.048"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.023"
+        android:scaleX="0.85"
+        android:scaleY="0.85"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="7dp"
         app:srcCompat="@drawable/backbutton" />
+
 
     <ImageButton
         android:id="@+id/pbutton"
@@ -54,5 +63,6 @@
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp"
         app:srcCompat="@drawable/diceuth" />
+
 
 </RelativeLayout>

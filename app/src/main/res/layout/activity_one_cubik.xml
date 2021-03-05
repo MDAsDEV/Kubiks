@@ -20,7 +20,7 @@
         android:scaleX="0.85"
         android:scaleY="0.85"
         android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="7dp"
         app:srcCompat="@drawable/backbutton" />
 
     <ImageButton
