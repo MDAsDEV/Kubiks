@@ -46,6 +46,17 @@ class two_kubiks : AppCompatActivity() {
                 }
             })
         }
+        val button_setings = findViewById<ImageButton>(R.id.settings_button_2_kubiks) as ImageButton
+        if (!was){
+            button_setings.setOnTouchListener(object : View.OnTouchListener {
+                override fun onTouch(v: View?, event: MotionEvent?): Boolean {
+                    when (event?.action){
+                        MotionEvent.ACTION_DOWN -> scale_settings()//Do Something
+                    }
+                    return v?.onTouchEvent(event) ?: true
+                }
+            })
+        }
 
     }
 
@@ -165,6 +176,25 @@ class two_kubiks : AppCompatActivity() {
             override fun onAnimationRepeat(animation: Animation) {}
         })
         was = false
+    }
+    fun scale_settings(){
+        was = true
+        val image: ImageView = findViewById(R.id.settings_button_2_kubiks)
+        val animation = AnimationUtils.loadAnimation(this, R.anim.scale_settings)
+        image.startAnimation(animation)
+        animation.setAnimationListener(object : Animation.AnimationListener {
+            override fun onAnimationStart(animation: Animation) {
+            }
+            override fun onAnimationEnd(animation: Animation) {
+                Log.i("START", "here started")
+                go_to_settings()
+            }
+            override fun onAnimationRepeat(animation: Animation) {}
+        })
+    }
+    fun go_to_settings(){
+        val intent_setting = Intent(this, settings::class.java)
+        startActivity(intent_setting)
     }
 }
 

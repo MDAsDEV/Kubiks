@@ -23,7 +23,7 @@ class one_cubik : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_one_cubik)
         val button_id = findViewById<ImageButton>(R.id.pbutton) as ImageButton
-        if (was == false) {
+        if (!was) {
             button_id.setOnTouchListener(object : View.OnTouchListener {
                 override fun onTouch(v: View?, event: MotionEvent?): Boolean {
                     when (event?.action){
@@ -34,7 +34,7 @@ class one_cubik : AppCompatActivity() {
             })
         }
         val button_back_id = findViewById<ImageButton>(R.id.bbutton) as ImageButton
-        if (was == false){
+        if (!was){
             button_back_id.setOnTouchListener(object : View.OnTouchListener {
                 override fun onTouch(v: View?, event: MotionEvent?): Boolean {
                     when (event?.action){
@@ -44,6 +44,19 @@ class one_cubik : AppCompatActivity() {
                 }
             })
         }
+
+        val button_setings = findViewById<ImageButton>(R.id.settings_button) as ImageButton
+        if (!was){
+            button_setings.setOnTouchListener(object : View.OnTouchListener {
+                override fun onTouch(v: View?, event: MotionEvent?): Boolean {
+                    when (event?.action){
+                        MotionEvent.ACTION_DOWN -> scale_settings()//Do Something
+                    }
+                    return v?.onTouchEvent(event) ?: true
+                }
+            })
+        }
+
         }
 
     fun go_back(){
@@ -128,7 +141,25 @@ class one_cubik : AppCompatActivity() {
             override fun onAnimationRepeat(animation: Animation) {}
         })
     }
-
+    fun scale_settings(){
+        was = true
+        val image: ImageView = findViewById(R.id.settings_button)
+        val animation = AnimationUtils.loadAnimation(this, R.anim.scale_settings)
+        image.startAnimation(animation)
+        animation.setAnimationListener(object : AnimationListener {
+            override fun onAnimationStart(animation: Animation) {
+            }
+            override fun onAnimationEnd(animation: Animation) {
+                Log.i("START", "here started")
+                go_to_settings()
+            }
+            override fun onAnimationRepeat(animation: Animation) {}
+        })
+    }
+    fun go_to_settings(){
+        val intent_setting = Intent(this, settings::class.java)
+        startActivity(intent_setting)
+    }
 }
 
 
