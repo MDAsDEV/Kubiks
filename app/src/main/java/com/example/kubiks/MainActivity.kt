@@ -19,6 +19,7 @@ import androidx.core.view.isVisible
 class MainActivity : AppCompatActivity() {
 
     private lateinit var prefs: SharedPreferences
+    private lateinit var prefs_sound: SharedPreferences
     private val APP_PREFERENCES_COUNTER = "counter"
     private var was_first_screen: Int = 0
     var was = false
@@ -28,6 +29,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         prefs =
             getSharedPreferences("settings", Context.MODE_PRIVATE)
+        prefs_sound = getSharedPreferences("sound_settings", Context.MODE_PRIVATE)
         val start_phone = findViewById(R.id.click) as ImageView;
         start_phone.setOnTouchListener(object : View.OnTouchListener {
             override fun onTouch(v: View?, event: MotionEvent?): Boolean {
