@@ -9,7 +9,7 @@ class settings : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
     }
-    fun gohome(){
+    fun go_home(){
         val back_activity = Intent(this, MainActivity::class.java)
         startActivity(back_activity)
     }
