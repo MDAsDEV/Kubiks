@@ -56,9 +56,13 @@
         app:srcCompat="@drawable/diceth"
         android:contentDescription="@string/onedice" />
 
-
-
-
+    <Button
+        android:id="@+id/testbtn1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="test"
+        ></Button>
 
 
 </RelativeLayout>

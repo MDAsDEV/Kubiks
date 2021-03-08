@@ -21,7 +21,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var prefs: SharedPreferences
     private lateinit var prefs_sound: SharedPreferences
     private val APP_PREFERENCES_COUNTER = "counter"
+    private val SOUND_PREFERENCES_MODE = "sound"
     private var was_first_screen: Int = 0
+    private var is_mute:Boolean = false
     var was = false
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -131,6 +133,10 @@ class MainActivity : AppCompatActivity() {
             start_phone.isVisible = false // Делаем нашу ImageButton (которая является подсказкой куда тыкать на экране) невидимой
         }
 
+        if (prefs_sound.contains(APP_PREFERENCES_COUNTER)){
+            is_mute = prefs.getBoolean(SOUND_PREFERENCES_MODE, false)
+
+        }
     }
 
 }

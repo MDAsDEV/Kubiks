@@ -1,6 +1,10 @@
 package com.example.kubiks
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.media.AudioAttributes
+import android.media.MediaPlayer
+import android.media.SoundPool
+import android.media.SoundPool.OnLoadCompleteListener
 import android.os.Bundle
 import android.util.Log
 import android.view.MotionEvent
@@ -8,19 +12,25 @@ import android.view.View
 import android.view.animation.Animation
 import android.view.animation.Animation.AnimationListener
 import android.view.animation.AnimationUtils
+import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_one_cubik.*
-import android.media.AudioManager;
-import android.media.SoundPool;
-import android.media.SoundPool.OnLoadCompleteListener;
 import kotlin.random.Random
+import kotlin.system.exitProcess
 
 
-class one_cubik : AppCompatActivity() {
+class one_cubik : AppCompatActivity(), OnLoadCompleteListener {
     var was = false
+    var loaded: Boolean = false
+    lateinit var soundpool: SoundPool
+    private lateinit var mp: MediaPlayer
+    private var totalTime: Int = 0
+
+    //private val soundId = 1
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,10 +59,10 @@ class one_cubik : AppCompatActivity() {
         }
 
         val button_setings = findViewById<ImageButton>(R.id.settings_button) as ImageButton
-        if (!was){
+        if (!was) {
             button_setings.setOnTouchListener(object : View.OnTouchListener {
                 override fun onTouch(v: View?, event: MotionEvent?): Boolean {
-                    when (event?.action){
+                    when (event?.action) {
                         MotionEvent.ACTION_DOWN -> scale_settings()//Do Something
                     }
                     return v?.onTouchEvent(event) ?: true
@@ -60,6 +70,13 @@ class one_cubik : AppCompatActivity() {
             })
         }
 
+
+
+        mp = MediaPlayer.create(this, R.raw.dice)
+        mp.isLooping = false
+        mp.setVolume(0.5f, 0.5f)
+        totalTime = mp.duration
+        Log.i("total time == ", totalTime.toString())
         }
 
     fun go_back(){
@@ -99,34 +116,46 @@ class one_cubik : AppCompatActivity() {
             6 -> change_img_six()
         }
     }
+    fun play_sound(){
+        mp.start()
+
+    }
     fun scale_play(){
-        was = true
-        val image: ImageView = findViewById(R.id.pbutton)
-        val animation =
-            AnimationUtils.loadAnimation(this, R.anim.scale_anim)
-        image.startAnimation(animation)
-        val animation_empty = AnimationUtils.loadAnimation(this, R.anim.scale_empty)
+        if (!mp.isPlaying) {
+            play_sound()
+            was = true
+            val image: ImageView = findViewById(R.id.pbutton)
+            val animation =
+                AnimationUtils.loadAnimation(this, R.anim.scale_anim)
+            image.startAnimation(animation)
+            val animation_empty = AnimationUtils.loadAnimation(this, R.anim.scale_empty)
 
-        animation.setAnimationListener(object : AnimationListener {
-            override fun onAnimationStart(animation: Animation) {
-            }
-            override fun onAnimationEnd(animation: Animation) {
-                Log.i("START NEW", "START")
-                image.startAnimation(animation_empty)
-            }
-            override fun onAnimationRepeat(animation: Animation) {}
-        })
+            animation.setAnimationListener(object : AnimationListener {
+                override fun onAnimationStart(animation: Animation) {
+                }
 
-        animation_empty.setAnimationListener(object : AnimationListener {
-            override fun onAnimationStart(animation: Animation) {
-            }
-            override fun onAnimationEnd(animation: Animation) {
-                Log.i("START", "here started")
-                lets_play()
-            }
-            override fun onAnimationRepeat(animation: Animation) {}
-        })
-        was = false
+                override fun onAnimationEnd(animation: Animation) {
+                    Log.i("START NEW", "START")
+                    image.startAnimation(animation_empty)
+                }
+
+                override fun onAnimationRepeat(animation: Animation) {}
+            })
+
+            animation_empty.setAnimationListener(object : AnimationListener {
+                override fun onAnimationStart(animation: Animation) {
+                }
+
+                override fun onAnimationEnd(animation: Animation) {
+                    Log.i("START", "here started")
+                    lets_play()
+                }
+
+                override fun onAnimationRepeat(animation: Animation) {}
+            })
+            was = false
+            Log.i("test", "start function")
+        }
     }
     fun scale_back(){
         was = true
@@ -163,6 +192,13 @@ class one_cubik : AppCompatActivity() {
         val intent_setting = Intent(this, settings::class.java)
         startActivity(intent_setting)
     }
+
+    override fun onLoadComplete(soundPool: SoundPool?, sampleId: Int, status: Int) {
+        TODO("Not yet implemented")
+    }
 }
+
+
+
 
 
