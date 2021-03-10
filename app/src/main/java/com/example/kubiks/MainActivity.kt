@@ -19,11 +19,10 @@ import androidx.core.view.isVisible
 class MainActivity : AppCompatActivity() {
 
     private lateinit var prefs: SharedPreferences
-    private lateinit var prefs_sound: SharedPreferences
     private val APP_PREFERENCES_COUNTER = "counter"
-    private val SOUND_PREFERENCES_MODE = "sound"
+
     private var was_first_screen: Int = 0
-    private var is_mute:Boolean = false
+
     var was = false
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,7 +30,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         prefs =
             getSharedPreferences("settings", Context.MODE_PRIVATE)
-        prefs_sound = getSharedPreferences("sound_settings", Context.MODE_PRIVATE)
         val start_phone = findViewById(R.id.click) as ImageView;
         start_phone.setOnTouchListener(object : View.OnTouchListener {
             override fun onTouch(v: View?, event: MotionEvent?): Boolean {
@@ -66,6 +64,7 @@ class MainActivity : AppCompatActivity() {
                 }
             })
         }
+
     }
     fun counter_plus(){
         was_first_screen += 1 // Изменяем число при нажатии на экран
@@ -120,6 +119,7 @@ class MainActivity : AppCompatActivity() {
 
         val edit_settings = prefs.edit()
         edit_settings.putInt(APP_PREFERENCES_COUNTER, was_first_screen).apply()
+
     }
     override fun onResume() { // Функция, запускающаяся при включении приложения
         super.onResume()
@@ -132,11 +132,8 @@ class MainActivity : AppCompatActivity() {
             val start_phone = findViewById(R.id.dark_phone) as ImageView;
             start_phone.isVisible = false // Делаем нашу ImageButton (которая является подсказкой куда тыкать на экране) невидимой
         }
+        Log.i("test music preferences", "onresume")
 
-        if (prefs_sound.contains(APP_PREFERENCES_COUNTER)){
-            is_mute = prefs.getBoolean(SOUND_PREFERENCES_MODE, false)
-
-        }
     }
 
 }

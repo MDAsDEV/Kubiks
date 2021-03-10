@@ -1,6 +1,8 @@
 package com.example.kubiks
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.media.AudioAttributes
 import android.media.MediaPlayer
 import android.media.SoundPool
@@ -18,6 +20,7 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import kotlinx.android.synthetic.main.activity_one_cubik.*
 import kotlin.random.Random
 import kotlin.system.exitProcess
@@ -29,12 +32,17 @@ class one_cubik : AppCompatActivity(), OnLoadCompleteListener {
     lateinit var soundpool: SoundPool
     private lateinit var mp: MediaPlayer
     private var totalTime: Int = 0
-
+    public var leftVolume: Int = 1
+    public var rightVolume: Int = 1
     //private val soundId = 1
+    private val SOUND_PREFERENCES_MODE = "sound"
+    var is_mute_sound: Boolean = false
+    private lateinit var prefs_sound: SharedPreferences
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_one_cubik)
+        prefs_sound = getSharedPreferences("sound_settings", Context.MODE_PRIVATE)
         val button_id = findViewById<ImageButton>(R.id.pbutton) as ImageButton
         if (!was) {
             button_id.setOnTouchListener(object : View.OnTouchListener {
@@ -73,8 +81,6 @@ class one_cubik : AppCompatActivity(), OnLoadCompleteListener {
 
 
         mp = MediaPlayer.create(this, R.raw.dice)
-        mp.isLooping = false
-        mp.setVolume(0.5f, 0.5f)
         totalTime = mp.duration
         Log.i("total time == ", totalTime.toString())
         }
@@ -117,6 +123,8 @@ class one_cubik : AppCompatActivity(), OnLoadCompleteListener {
         }
     }
     fun play_sound(){
+        mp.isLooping = false
+        mp.setVolume(leftVolume.toFloat(), rightVolume.toFloat())
         mp.start()
 
     }
@@ -193,6 +201,29 @@ class one_cubik : AppCompatActivity(), OnLoadCompleteListener {
         startActivity(intent_setting)
     }
 
+    override fun onStart() {
+        super.onStart()
+        Log.i("Volume Level == ", leftVolume.toString() + ' ' + rightVolume.toString())
+    }
+    override fun onResume() { // Функция, запускающаяся при включении приложения
+        super.onResume()
+        Log.i("check event", "on resume event")
+        if (prefs_sound.contains(SOUND_PREFERENCES_MODE)){
+            Log.i("check_event", "on resume event if 2")
+            is_mute_sound = prefs_sound.getBoolean(SOUND_PREFERENCES_MODE, false)
+            Log.i("test music preferences", is_mute_sound.toString())
+            if (is_mute_sound){
+                leftVolume = 0
+                rightVolume = 0
+            }
+            else {
+                leftVolume = 1
+                rightVolume = 1
+            }
+            Log.i("Volume Level == ", leftVolume.toString() + ' ' + rightVolume.toString())
+        }
+
+    }
     override fun onLoadComplete(soundPool: SoundPool?, sampleId: Int, status: Int) {
         TODO("Not yet implemented")
     }

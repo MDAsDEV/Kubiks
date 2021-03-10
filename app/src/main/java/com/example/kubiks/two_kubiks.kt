@@ -1,9 +1,12 @@
 package com.example.kubiks
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.widget.ImageView
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.drawable.AnimationDrawable
+import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -20,11 +23,19 @@ import kotlin.random.Random
 
 class two_kubiks : AppCompatActivity() {
     var was = false
+    private lateinit var mp: MediaPlayer
+    private var totalTime: Int = 0
+    public var leftVolume: Int = 1
+    public var rightVolume: Int = 1
+    private val SOUND_PREFERENCES_MODE = "sound"
+    var is_mute_sound: Boolean = false
+    private lateinit var prefs_sound: SharedPreferences
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_two_kubiks)
         val button_id = findViewById<ImageButton>(R.id.pbutton) as ImageButton
+        prefs_sound = getSharedPreferences("sound_settings", Context.MODE_PRIVATE)
         if (was == false) {
             button_id.setOnTouchListener(object : View.OnTouchListener {
                 override fun onTouch(v: View?, event: MotionEvent?): Boolean {
@@ -58,8 +69,17 @@ class two_kubiks : AppCompatActivity() {
             })
         }
 
-    }
+        mp = MediaPlayer.create(this, R.raw.dice)
+        totalTime = mp.duration
+        Log.i("total time == ", totalTime.toString())
 
+    }
+    fun play_sound(){
+        mp.isLooping = false
+        mp.setVolume(leftVolume.toFloat(), rightVolume.toFloat())
+        mp.start()
+
+    }
     fun go_back(){
         val back_activity = Intent(this, MainActivity::class.java)
         startActivity(back_activity)
@@ -149,33 +169,40 @@ class two_kubiks : AppCompatActivity() {
         })
     }
     fun scale_play(){
-        was = true
-        val image: ImageView = findViewById(R.id.pbutton)
-        val animation =
-            AnimationUtils.loadAnimation(this, R.anim.scale_anim)
-        image.startAnimation(animation)
-        val animation_empty = AnimationUtils.loadAnimation(this, R.anim.scale_empty)
+        if (!mp.isPlaying) {
+            play_sound()
+            was = true
+            val image: ImageView = findViewById(R.id.pbutton)
+            val animation =
+                AnimationUtils.loadAnimation(this, R.anim.scale_anim)
+            image.startAnimation(animation)
+            val animation_empty = AnimationUtils.loadAnimation(this, R.anim.scale_empty)
 
-        animation.setAnimationListener(object : Animation.AnimationListener {
-            override fun onAnimationStart(animation: Animation) {
-            }
-            override fun onAnimationEnd(animation: Animation) {
-                Log.i("START NEW", "START")
-                image.startAnimation(animation_empty)
-            }
-            override fun onAnimationRepeat(animation: Animation) {}
-        })
+            animation.setAnimationListener(object : Animation.AnimationListener {
+                override fun onAnimationStart(animation: Animation) {
+                }
 
-        animation_empty.setAnimationListener(object : Animation.AnimationListener {
-            override fun onAnimationStart(animation: Animation) {
-            }
-            override fun onAnimationEnd(animation: Animation) {
-                Log.i("START", "here started")
-                lets_play_two_cubes()
-            }
-            override fun onAnimationRepeat(animation: Animation) {}
-        })
-        was = false
+                override fun onAnimationEnd(animation: Animation) {
+                    Log.i("START NEW", "START")
+                    image.startAnimation(animation_empty)
+                }
+
+                override fun onAnimationRepeat(animation: Animation) {}
+            })
+
+            animation_empty.setAnimationListener(object : Animation.AnimationListener {
+                override fun onAnimationStart(animation: Animation) {
+                }
+
+                override fun onAnimationEnd(animation: Animation) {
+                    Log.i("START", "here started")
+                    lets_play_two_cubes()
+                }
+
+                override fun onAnimationRepeat(animation: Animation) {}
+            })
+            was = false
+        }
     }
     fun scale_settings(){
         was = true
@@ -195,6 +222,27 @@ class two_kubiks : AppCompatActivity() {
     fun go_to_settings(){
         val intent_setting = Intent(this, settings::class.java)
         startActivity(intent_setting)
+    }
+    override fun onStart() {
+        super.onStart()
+        Log.i("Volume Level == ", leftVolume.toString() + ' ' + rightVolume.toString())
+    }
+    override fun onResume() { // Функция, запускающаяся при включении приложения
+        super.onResume()
+        Log.i("check event", "on resume event")
+        if (prefs_sound.contains(SOUND_PREFERENCES_MODE)) {
+            Log.i("check_event", "on resume event if 2")
+            is_mute_sound = prefs_sound.getBoolean(SOUND_PREFERENCES_MODE, false)
+            Log.i("test music preferences", is_mute_sound.toString())
+            if (is_mute_sound) {
+                leftVolume = 0
+                rightVolume = 0
+            } else {
+                leftVolume = 1
+                rightVolume = 1
+            }
+            Log.i("Volume Level == ", leftVolume.toString() + ' ' + rightVolume.toString())
+        }
     }
 }
 
