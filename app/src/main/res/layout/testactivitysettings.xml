@@ -37,11 +37,13 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:layout_marginRight="-100dp"
         android:background="@null"
         android:scaleX="0.3"
         android:scaleY="0.3"
         app:srcCompat="@drawable/testtransparenton"></ImageView>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/clearedvoicebutton"></ImageView>
 </RelativeLayout>
