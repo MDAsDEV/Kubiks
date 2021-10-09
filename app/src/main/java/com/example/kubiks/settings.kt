@@ -14,6 +14,7 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
+import kotlinx.android.synthetic.main.activity_settings.*
 
 class settings : AppCompatActivity() {
     private val SOUND_PREFERENCES_MODE = "sound"
@@ -81,13 +82,18 @@ class settings : AppCompatActivity() {
         val edit_sound_settings = prefs_sound.edit()
         edit_sound_settings.putBoolean(SOUND_PREFERENCES_MODE, is_mute_sound).apply()
         val buttonSound = findViewById<ImageButton>(R.id.button_beautiful_sound)
+        val imageSoundText = findViewById<ImageView>(R.id.onbutton)
         if (is_mute_sound){
             val OffSoundDrawable = ContextCompat.getDrawable(applicationContext, R.drawable.clearedvoiceoffbutton_edited)
+            val OffSoundText = ContextCompat.getDrawable(applicationContext, R.drawable.off_button)
             buttonSound.setImageDrawable(OffSoundDrawable)
+            imageSoundText.setImageDrawable(OffSoundText)
             Log.i("SOUND BUTTON == ", "OFF")
         }
         else {
             val OnSoundDrawable = ContextCompat.getDrawable(applicationContext, R.drawable.clearedvoicebutton)
+            val OnSoundText = ContextCompat.getDrawable(applicationContext, R.drawable.testtransparenton)
+            imageSoundText.setImageDrawable(OnSoundText)
             buttonSound.setImageDrawable(OnSoundDrawable)
             Log.i("SOUND BUTTON == ", "ON")
         }
