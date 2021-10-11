@@ -24,10 +24,6 @@ class settings : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
-
-
-
-
         prefs_sound = getSharedPreferences("sound_settings", Context.MODE_PRIVATE)
 
         if (prefs_sound.contains(SOUND_PREFERENCES_MODE)){
@@ -36,15 +32,24 @@ class settings : AppCompatActivity() {
         }
         Log.i("Sound check == ", "SOUND IS " + is_mute_sound.toString())
         val buttonSound = findViewById<ImageButton>(R.id.button_beautiful_sound)
+        val imageSoundText = findViewById<ImageView>(R.id.onbutton)
         if (is_mute_sound){
             val OffSoundDrawable = ContextCompat.getDrawable(applicationContext, R.drawable.clearedvoiceoffbutton_edited)
+            val OffSoundText = ContextCompat.getDrawable(applicationContext, R.drawable.off_button)
+            val OffSoundText_obj = findViewById<ImageView>(R.id.onbutton)
+            OffSoundText_obj.scaleX = 1.2.toFloat()
+            OffSoundText_obj.scaleY = 1.4.toFloat()
+
             buttonSound.setImageDrawable(OffSoundDrawable)
+            imageSoundText.setImageDrawable(OffSoundText)
             Log.i("SOUND BUTTON OPEN == ", "OFF")
         }
         else {
             val OnSoundDrawable = ContextCompat.getDrawable(applicationContext, R.drawable.clearedvoicebutton)
+            val OnSoundText = ContextCompat.getDrawable(applicationContext, R.drawable.testtransparenton)
+            imageSoundText.setImageDrawable(OnSoundText)
             buttonSound.setImageDrawable(OnSoundDrawable)
-            Log.i("SOUND BUTTON OPEN == ", "ON")
+            Log.i("SOUND BUTTON2 == ", "ON")
         }
 
 
@@ -86,6 +91,10 @@ class settings : AppCompatActivity() {
         if (is_mute_sound){
             val OffSoundDrawable = ContextCompat.getDrawable(applicationContext, R.drawable.clearedvoiceoffbutton_edited)
             val OffSoundText = ContextCompat.getDrawable(applicationContext, R.drawable.off_button)
+            val OffSoundText_obj = findViewById<ImageView>(R.id.onbutton)
+            OffSoundText_obj.scaleX = 1.2.toFloat()
+            OffSoundText_obj.scaleY = 1.4.toFloat()
+
             buttonSound.setImageDrawable(OffSoundDrawable)
             imageSoundText.setImageDrawable(OffSoundText)
             Log.i("SOUND BUTTON == ", "OFF")
@@ -95,7 +104,7 @@ class settings : AppCompatActivity() {
             val OnSoundText = ContextCompat.getDrawable(applicationContext, R.drawable.testtransparenton)
             imageSoundText.setImageDrawable(OnSoundText)
             buttonSound.setImageDrawable(OnSoundDrawable)
-            Log.i("SOUND BUTTON == ", "ON")
+            Log.i("SOUND BUTTON2 == ", "ON")
         }
 
     }
