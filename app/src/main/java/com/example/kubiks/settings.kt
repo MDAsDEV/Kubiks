@@ -37,9 +37,9 @@ class settings : AppCompatActivity() {
             val OffSoundDrawable = ContextCompat.getDrawable(applicationContext, R.drawable.clearedvoiceoffbutton_edited)
             val OffSoundText = ContextCompat.getDrawable(applicationContext, R.drawable.off_button)
             val OffSoundText_obj = findViewById<ImageView>(R.id.onbutton)
-            OffSoundText_obj.scaleX = 1.2.toFloat()
-            OffSoundText_obj.scaleY = 1.4.toFloat()
-
+            /*OffSoundText_obj.scaleX = 1.2.toFloat()
+            OffSoundText_obj.scaleY = 2.toFloat()
+            */
             buttonSound.setImageDrawable(OffSoundDrawable)
             imageSoundText.setImageDrawable(OffSoundText)
             Log.i("SOUND BUTTON OPEN == ", "OFF")

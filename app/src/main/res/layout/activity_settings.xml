@@ -8,69 +8,33 @@
     android:background="@drawable/settings_empty_phone"
     tools:context=".settings">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:id="@+id/lin_layout">
-
-    <ImageView
-        android:id="@+id/color"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@null"
-        android:scaleX="0.6"
-        android:scaleY="0.6"
-        app:srcCompat="@drawable/colorchange"
-        android:adjustViewBounds="true"
-    ></ImageView>
-
-    <ImageButton
-        android:id="@+id/play_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:background="@null"
-        android:scaleY="0.7"
-        android:scaleX="0.7"
-        app:srcCompat = "@drawable/play_advertisement"
-        ></ImageButton>
-    </LinearLayout>
-
-
-    <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_alignBottom="@+id/lin_layout"
-        android:layout_marginBottom="-150dp"
-        android:layout_marginRight="-100dp"
-        android:src="@drawable/enbutton"></ImageView>
-
-
     <ImageView
         android:id="@+id/onbutton"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="10dp"
-        android:layout_alignBottom="@+id/lin_layout"
-        android:layout_marginBottom="-150dp"
+        android:scaleType="fitCenter"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="180dp"
         android:adjustViewBounds="true"
-        android:src="@drawable/testtransparenton"></ImageView>
+        android:src="@drawable/testtransparenton">
+
+    </ImageView>
 
     <ImageButton
         android:id="@+id/button_beautiful_sound"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_alignBottom="@+id/onbutton"
         android:layout_marginRight="-5dp"
         android:layout_marginBottom="25dp"
-        android:scaleType="centerInside"
         android:adjustViewBounds="true"
-        android:layout_toLeftOf="@+id/onbutton"
         android:background="@null"
-        android:src="@drawable/clearedvoicebutton"></ImageButton>
+        android:scaleType="centerInside"
+        android:layout_alignLeft="@+id/onbutton"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="-55dp"
+        android:src="@drawable/clearedvoicebutton">
+
+    </ImageButton>
 
     <ImageButton
         android:id="@+id/homeBackButton"
