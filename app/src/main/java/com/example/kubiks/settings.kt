@@ -10,9 +10,8 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import android.widget.Button
-import android.widget.ImageButton
-import android.widget.ImageView
+import android.widget.*
+import androidx.appcompat.widget.SwitchCompat
 import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_settings.*
 
@@ -25,58 +24,30 @@ class settings : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
         prefs_sound = getSharedPreferences("sound_settings", Context.MODE_PRIVATE)
-
-        if (prefs_sound.contains(SOUND_PREFERENCES_MODE)){
+        if (prefs_sound.contains(SOUND_PREFERENCES_MODE)) {
             is_mute_sound = prefs_sound.getBoolean(SOUND_PREFERENCES_MODE, false)
             Log.i("test music preferences", is_mute_sound.toString())
         }
-        Log.i("Sound check == ", "SOUND IS " + is_mute_sound.toString())
-        val buttonSound = findViewById<ImageButton>(R.id.button_beautiful_sound)
-        val imageSoundText = findViewById<ImageView>(R.id.onbutton)
-        if (is_mute_sound){
-            val OffSoundDrawable = ContextCompat.getDrawable(applicationContext, R.drawable.clearedvoiceoffbutton_edited)
-            val OffSoundText = ContextCompat.getDrawable(applicationContext, R.drawable.off_button)
-            val OffSoundText_obj = findViewById<ImageView>(R.id.onbutton)
-            /*OffSoundText_obj.scaleX = 1.2.toFloat()
-            OffSoundText_obj.scaleY = 2.toFloat()
-            */
-            buttonSound.setImageDrawable(OffSoundDrawable)
-            imageSoundText.setImageDrawable(OffSoundText)
-            Log.i("SOUND BUTTON OPEN == ", "OFF")
-        }
-        else {
-            val OnSoundDrawable = ContextCompat.getDrawable(applicationContext, R.drawable.clearedvoicebutton)
-            val OnSoundText = ContextCompat.getDrawable(applicationContext, R.drawable.testtransparenton)
-            imageSoundText.setImageDrawable(OnSoundText)
-            buttonSound.setImageDrawable(OnSoundDrawable)
-            Log.i("SOUND BUTTON2 == ", "ON")
-        }
-
-
-        val button_id = findViewById<ImageButton>(R.id.button_beautiful_sound) as ImageButton
-        if (was == false) {
-            button_id.setOnTouchListener(object : View.OnTouchListener {
-                override fun onTouch(v: View?, event: MotionEvent?): Boolean {
-                    when (event?.action){
-                        MotionEvent.ACTION_DOWN -> scale_sound()//Do Something
-                    }
-
-                    return v?.onTouchEvent(event) ?: true
-                }
-            })
+        val SwitchSound: SwitchCompat = findViewById<SwitchCompat>(R.id.switch_sound)
+        SwitchSound.isChecked = !is_mute_sound
+        SwitchSound.setOnCheckedChangeListener { buttonView, isChecked ->
+            change_sound_mode()
         }
         val button_back_id = findViewById<ImageButton>(R.id.homeBackButton) as ImageButton
         if (was == false) {
             button_back_id.setOnTouchListener(object : View.OnTouchListener {
                 override fun onTouch(v: View?, event: MotionEvent?): Boolean {
-                    when (event?.action){
+                    when (event?.action) {
                         MotionEvent.ACTION_DOWN -> scale_back()
                     }
                     return v?.onTouchEvent(event) ?: true
                 }
             })
         }
+        val colors = arrayOf("Red", "Green")
+        val spinner_object = findViewById<Spinner>(R.id.spinner_test)
     }
+
     fun change_sound_mode(){
         if (prefs_sound.contains(SOUND_PREFERENCES_MODE)){
             is_mute_sound = prefs_sound.getBoolean(SOUND_PREFERENCES_MODE, false)
@@ -86,27 +57,6 @@ class settings : AppCompatActivity() {
         Log.i("boolean tag == ", is_mute_sound.toString())
         val edit_sound_settings = prefs_sound.edit()
         edit_sound_settings.putBoolean(SOUND_PREFERENCES_MODE, is_mute_sound).apply()
-        val buttonSound = findViewById<ImageButton>(R.id.button_beautiful_sound)
-        val imageSoundText = findViewById<ImageView>(R.id.onbutton)
-        if (is_mute_sound){
-            val OffSoundDrawable = ContextCompat.getDrawable(applicationContext, R.drawable.clearedvoiceoffbutton_edited)
-            val OffSoundText = ContextCompat.getDrawable(applicationContext, R.drawable.off_button)
-            val OffSoundText_obj = findViewById<ImageView>(R.id.onbutton)
-            OffSoundText_obj.scaleX = 1.2.toFloat()
-            OffSoundText_obj.scaleY = 1.4.toFloat()
-
-            buttonSound.setImageDrawable(OffSoundDrawable)
-            imageSoundText.setImageDrawable(OffSoundText)
-            Log.i("SOUND BUTTON == ", "OFF")
-        }
-        else {
-            val OnSoundDrawable = ContextCompat.getDrawable(applicationContext, R.drawable.clearedvoicebutton)
-            val OnSoundText = ContextCompat.getDrawable(applicationContext, R.drawable.testtransparenton)
-            imageSoundText.setImageDrawable(OnSoundText)
-            buttonSound.setImageDrawable(OnSoundDrawable)
-            Log.i("SOUND BUTTON2 == ", "ON")
-        }
-
     }
     fun go_home(){
         val back_activity = Intent(this, MainActivity::class.java)
@@ -143,23 +93,7 @@ class settings : AppCompatActivity() {
             override fun onAnimationRepeat(animation: Animation) {}
         })
     }
-    fun scale_sound(){
-        was = true
-        val image: ImageView = findViewById(R.id.button_beautiful_sound)
-        val animation =
-            AnimationUtils.loadAnimation(this, R.anim.scale_back)
-        image.startAnimation(animation)
-        animation.setAnimationListener(object : Animation.AnimationListener {
-            override fun onAnimationStart(animation: Animation) {
-            }
-            override fun onAnimationEnd(animation: Animation) {
-                Log.i("START", "here started")
-                change_sound_mode()
-            }
-            override fun onAnimationRepeat(animation: Animation) {}
-        })
 
-    }
     fun go_back(){
         val back_activity = Intent(this, MainActivity::class.java)
         startActivity(back_activity)

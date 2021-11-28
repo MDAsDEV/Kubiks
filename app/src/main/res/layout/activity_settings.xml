@@ -8,33 +8,32 @@
     android:background="@drawable/settings_empty_phone"
     tools:context=".settings">
 
-    <ImageView
-        android:id="@+id/onbutton"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:scaleType="fitCenter"
-        android:layout_centerVertical="true"
-        android:layout_marginStart="180dp"
-        android:adjustViewBounds="true"
-        android:src="@drawable/testtransparenton">
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/switch_sound"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="250dp" />
 
-    </ImageView>
 
-    <ImageButton
-        android:id="@+id/button_beautiful_sound"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginRight="-5dp"
-        android:layout_marginBottom="25dp"
-        android:adjustViewBounds="true"
-        android:background="@null"
-        android:scaleType="centerInside"
-        android:layout_alignLeft="@+id/onbutton"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="-55dp"
-        android:src="@drawable/clearedvoicebutton">
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/switch_language"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/switch_sound"
+        android:layout_marginTop="30dp"
+         />
 
-    </ImageButton>
+    <Spinner
+        android:id="@+id/spinner_test"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:layout_marginStart="250dp"
+        android:entries="@array/catNames"
+        >
+    </Spinner>
 
     <ImageButton
         android:id="@+id/homeBackButton"
