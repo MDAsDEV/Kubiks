@@ -14,20 +14,35 @@ import android.widget.*
 import androidx.appcompat.widget.SwitchCompat
 import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_settings.*
+import android.widget.AdapterView
+import android.widget.AdapterView.OnItemSelectedListener
+
+import android.widget.Toast
+
+
+
 
 class settings : AppCompatActivity() {
     private val SOUND_PREFERENCES_MODE = "sound"
+    private val BACKGROUND_PREFERENCE_MODE = "background"
     var is_mute_sound: Boolean = false
     var was = false
     private lateinit var prefs_sound: SharedPreferences
+    private lateinit var prefs_background: SharedPreferences
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
         prefs_sound = getSharedPreferences("sound_settings", Context.MODE_PRIVATE)
+        prefs_background = getSharedPreferences("background_settings" ,Context.MODE_PRIVATE)
         if (prefs_sound.contains(SOUND_PREFERENCES_MODE)) {
             is_mute_sound = prefs_sound.getBoolean(SOUND_PREFERENCES_MODE, false)
             Log.i("test music preferences", is_mute_sound.toString())
         }
+        if (prefs_background.contains(BACKGROUND_PREFERENCE_MODE)){
+            val color_background = prefs_background.getString(BACKGROUND_PREFERENCE_MODE, "None")
+            Log.i("test color background ", color_background)
+        }
+        // Необходимо добавить метод setSelection!!!
         val SwitchSound: SwitchCompat = findViewById<SwitchCompat>(R.id.switch_sound)
         SwitchSound.isChecked = !is_mute_sound
         SwitchSound.setOnCheckedChangeListener { buttonView, isChecked ->
@@ -44,8 +59,21 @@ class settings : AppCompatActivity() {
                 }
             })
         }
-        val colors = arrayOf("Red", "Green")
-        val spinner_object = findViewById<Spinner>(R.id.spinner_test)
+        val spinner_object = findViewById<Spinner>(R.id.spinner_choose_fone)
+        spinner_object.setOnItemSelectedListener(object : OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                itemSelected: View, selectedItemPosition: Int, selectedId: Long
+            ) {
+                val AllColors = resources.getStringArray(R.array.colors)
+                Log.i("Selected Item Poion == ", selectedItemPosition.toString())
+                val CurrentBackgroundColor = AllColors.get(selectedItemPosition)
+                changeBackgroundMode(CurrentBackgroundColor)
+
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+        })
     }
 
     fun change_sound_mode(){
@@ -61,6 +89,14 @@ class settings : AppCompatActivity() {
     fun go_home(){
         val back_activity = Intent(this, MainActivity::class.java)
         startActivity(back_activity)
+    }
+
+    fun changeBackgroundMode(NewColor: String){
+        if (prefs_background.contains(BACKGROUND_PREFERENCE_MODE)){
+            val color_background = prefs_background.getString(BACKGROUND_PREFERENCE_MODE, "None")
+        }
+        val edit_background_settings = prefs_background.edit()
+        edit_background_settings.putString(BACKGROUND_PREFERENCE_MODE, NewColor).apply()
     }
 
     override fun onPause() {

@@ -10,10 +10,8 @@
     <string name="imgviewone">TODO</string>
     <string name="onedice">TODO</string>
     <string name="startimg">TODO</string>
-    <string-array name="catNames">
-        <item>Барсик</item>
-        <item>Мурзик</item>
-        <item>Васька</item>
-        <item>Рыжик</item>
+    <string-array name="colors">
+        <item>Зеленый</item>
+        <item>Желтый</item>
     </string-array>
 </resources>

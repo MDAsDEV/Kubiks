@@ -26,26 +26,24 @@
          />
 
     <Spinner
-        android:id="@+id/spinner_test"
-        android:layout_width="match_parent"
+        android:id="@+id/spinner_choose_fone"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:layout_marginStart="250dp"
-        android:entries="@array/catNames"
-        >
-    </Spinner>
+        android:layout_below="@+id/switch_language"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="100dp"
+        android:entries="@array/colors"></Spinner>
 
     <ImageButton
         android:id="@+id/homeBackButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:scaleType="fitCenter"
-        android:background="@null"
-        android:scaleX="0.5"
-        android:scaleY="0.5"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        app:srcCompat="@drawable/home_button"
-        ></ImageButton>
+        android:background="@null"
+        android:scaleType="fitCenter"
+        android:scaleX="0.5"
+        android:scaleY="0.5"
+        app:srcCompat="@drawable/home_button"></ImageButton>
 
 </RelativeLayout>

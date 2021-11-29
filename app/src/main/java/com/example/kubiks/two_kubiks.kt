@@ -28,14 +28,22 @@ class two_kubiks : AppCompatActivity() {
     public var leftVolume: Int = 1
     public var rightVolume: Int = 1
     private val SOUND_PREFERENCES_MODE = "sound"
+    private val BACKGROUND_PREFERENCE_MODE = "background"
     var is_mute_sound: Boolean = false
     private lateinit var prefs_sound: SharedPreferences
+    private lateinit var prefs_background: SharedPreferences
+
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_two_kubiks)
         val button_id = findViewById<ImageButton>(R.id.pbutton) as ImageButton
         prefs_sound = getSharedPreferences("sound_settings", Context.MODE_PRIVATE)
+        prefs_background = getSharedPreferences("background_settings" ,Context.MODE_PRIVATE)
+        if (prefs_background.contains(BACKGROUND_PREFERENCE_MODE)){
+            val color_background = prefs_background.getString(BACKGROUND_PREFERENCE_MODE, "None")
+            Log.i("test color background ", color_background)
+        }
         if (was == false) {
             button_id.setOnTouchListener(object : View.OnTouchListener {
                 override fun onTouch(v: View?, event: MotionEvent?): Boolean {
