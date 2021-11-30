@@ -14,10 +14,7 @@ import android.view.View
 import android.view.animation.Animation
 import android.view.animation.Animation.AnimationListener
 import android.view.animation.AnimationUtils
-import android.widget.Button
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
@@ -34,15 +31,27 @@ class one_cubik : AppCompatActivity(), OnLoadCompleteListener {
     private var totalTime: Int = 0
     public var leftVolume: Int = 1
     public var rightVolume: Int = 1
-    //private val soundId = 1
     private val SOUND_PREFERENCES_MODE = "sound"
+    private val BACKGROUND_PREFERENCES_MODE = "background"
     var is_mute_sound: Boolean = false
     private lateinit var prefs_sound: SharedPreferences
+    private lateinit var prefs_background: SharedPreferences
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_one_cubik)
+        val OneKubikLayout = findViewById<RelativeLayout>(R.id.one_kubik_relative_layout_id)
         prefs_sound = getSharedPreferences("sound_settings", Context.MODE_PRIVATE)
+        prefs_background = getSharedPreferences("background_settings", Context.MODE_PRIVATE)
+
+        if (prefs_background.contains(BACKGROUND_PREFERENCES_MODE)){
+            val color_background = prefs_background.getString(BACKGROUND_PREFERENCES_MODE, "None")
+            Log.i("test colorba_one kubik ", color_background)
+            if (color_background == "Желтый"){
+                OneKubikLayout.setBackgroundResource(R.drawable.ic_launcher_background)
+            }
+        }
+
         val button_id = findViewById<ImageButton>(R.id.pbutton) as ImageButton
         if (!was) {
             button_id.setOnTouchListener(object : View.OnTouchListener {
@@ -77,7 +86,6 @@ class one_cubik : AppCompatActivity(), OnLoadCompleteListener {
                 }
             })
         }
-
 
 
         mp = MediaPlayer.create(this, R.raw.dice)

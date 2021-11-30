@@ -38,6 +38,8 @@ class settings : AppCompatActivity() {
             is_mute_sound = prefs_sound.getBoolean(SOUND_PREFERENCES_MODE, false)
             Log.i("test music preferences", is_mute_sound.toString())
         }
+        val AllColors = resources.getStringArray(R.array.colors)
+
         if (prefs_background.contains(BACKGROUND_PREFERENCE_MODE)){
             val color_background = prefs_background.getString(BACKGROUND_PREFERENCE_MODE, "None")
             Log.i("test color background ", color_background)
@@ -60,12 +62,16 @@ class settings : AppCompatActivity() {
             })
         }
         val spinner_object = findViewById<Spinner>(R.id.spinner_choose_fone)
+        if (prefs_background.contains(BACKGROUND_PREFERENCE_MODE)){
+            val color_background = prefs_background.getString(BACKGROUND_PREFERENCE_MODE, "None")
+            val color_background_id = AllColors.indexOf(color_background)
+            spinner_object.setSelection(color_background_id)
+        }
         spinner_object.setOnItemSelectedListener(object : OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>?,
                 itemSelected: View, selectedItemPosition: Int, selectedId: Long
             ) {
-                val AllColors = resources.getStringArray(R.array.colors)
                 Log.i("Selected Item Poion == ", selectedItemPosition.toString())
                 val CurrentBackgroundColor = AllColors.get(selectedItemPosition)
                 changeBackgroundMode(CurrentBackgroundColor)

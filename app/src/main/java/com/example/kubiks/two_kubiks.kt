@@ -16,6 +16,7 @@ import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.ImageButton
+import android.widget.RelativeLayout
 import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_one_cubik.*
 import kotlinx.android.synthetic.main.activity_two_kubiks.*
@@ -38,11 +39,15 @@ class two_kubiks : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_two_kubiks)
         val button_id = findViewById<ImageButton>(R.id.pbutton) as ImageButton
+        val TwoKubiksLayout = findViewById<RelativeLayout>(R.id.layout_test)
         prefs_sound = getSharedPreferences("sound_settings", Context.MODE_PRIVATE)
         prefs_background = getSharedPreferences("background_settings" ,Context.MODE_PRIVATE)
         if (prefs_background.contains(BACKGROUND_PREFERENCE_MODE)){
             val color_background = prefs_background.getString(BACKGROUND_PREFERENCE_MODE, "None")
             Log.i("test color background ", color_background)
+            if (color_background == "Желтый"){
+                TwoKubiksLayout.setBackgroundResource(R.drawable.ic_launcher_background)
+            }
         }
         if (was == false) {
             button_id.setOnTouchListener(object : View.OnTouchListener {
