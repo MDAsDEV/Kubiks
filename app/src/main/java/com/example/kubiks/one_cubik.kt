@@ -47,8 +47,8 @@ class one_cubik : AppCompatActivity(), OnLoadCompleteListener {
         if (prefs_background.contains(BACKGROUND_PREFERENCES_MODE)){
             val color_background = prefs_background.getString(BACKGROUND_PREFERENCES_MODE, "None")
             Log.i("test colorba_one kubik ", color_background)
-            if (color_background == "Желтый"){
-                OneKubikLayout.setBackgroundResource(R.drawable.ic_launcher_background)
+            if (color_background == "Розовый"){
+                OneKubikLayout.setBackgroundResource(R.drawable.background_pink)
             }
         }
 

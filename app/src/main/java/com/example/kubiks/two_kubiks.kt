@@ -40,13 +40,21 @@ class two_kubiks : AppCompatActivity() {
         setContentView(R.layout.activity_two_kubiks)
         val button_id = findViewById<ImageButton>(R.id.pbutton) as ImageButton
         val TwoKubiksLayout = findViewById<RelativeLayout>(R.id.layout_test)
+        val TwoKubiksPlayButton = findViewById<ImageButton>(R.id.pbutton)
         prefs_sound = getSharedPreferences("sound_settings", Context.MODE_PRIVATE)
         prefs_background = getSharedPreferences("background_settings" ,Context.MODE_PRIVATE)
         if (prefs_background.contains(BACKGROUND_PREFERENCE_MODE)){
             val color_background = prefs_background.getString(BACKGROUND_PREFERENCE_MODE, "None")
             Log.i("test color background ", color_background)
-            if (color_background == "Желтый"){
-                TwoKubiksLayout.setBackgroundResource(R.drawable.ic_launcher_background)
+            if (color_background == "Зеленый"){
+                TwoKubiksLayout.setBackgroundResource(R.drawable.background_salad)
+            }
+            if (color_background == "Розовый"){
+                TwoKubiksLayout.setBackgroundResource(R.drawable.background_pink)
+                TwoKubiksLayout.setBackgroundResource(R.drawable.play_pink)
+            }
+            if (color_background == "Голубой"){
+                TwoKubiksLayout.setBackgroundResource(R.drawable.background_salad)
             }
         }
         if (was == false) {

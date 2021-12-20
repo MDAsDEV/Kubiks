@@ -4,9 +4,12 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/m.bushmakin/StudioProjects/Kubiks/app/src/main/res/layout/activity_one_cubik.xml" value="0.1" />
+        <entry key="..\:/Users/m.bushmakin/StudioProjects/Kubiks/app/src/main/res/layout/activity_second.xml" value="0.1" />
         <entry key="..\:/Users/m.bushmakin/StudioProjects/Kubiks/app/src/main/res/layout/activity_settings.xml" value="0.1" />
         <entry key="..\:/Users/m.bushmakin/StudioProjects/Kubiks/app/src/main/res/layout/activity_two_kubiks.xml" value="0.1" />
         <entry key="..\:/Users/m.bushmakin/StudioProjects/Kubiks/app/src/main/res/layout/row.xml" value="0.17028985507246377" />
+        <entry key="..\:/Users/m.bushmakin/StudioProjects/Kubiks/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
+        <entry key="..\:/Users/m.bushmakin/StudioProjects/Kubiks/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1" />
       </map>
     </option>
   </component>

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:id="@+id/one_kubik_relative_layout_id"
     android:layout_height="match_parent"
-    android:background="@drawable/backgroundsecw"
+    android:background="@drawable/backbutton_blue"
     tools:context=".one_cubik"
     tools:ignore="ExtraText">
 
@@ -22,7 +22,7 @@
         android:scaleY="0.85"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="7dp"
-        app:srcCompat="@drawable/backbutton" />
+        app:srcCompat="@drawable/backbutton_blue" />
 
     <ImageButton
         android:id="@+id/pbutton"
@@ -36,7 +36,7 @@
         android:scaleY="0.65"
         android:scaleX="0.65"
         android:layout_marginBottom="50dp"
-        app:srcCompat="@drawable/playbutton" />
+        app:srcCompat="@drawable/playbutton_blue" />
     <ImageButton
         android:id="@+id/settings_button"
         android:background="@null"
@@ -48,7 +48,7 @@
         android:scaleX="0.7"
         android:scaleY="0.7"
         android:layout_marginRight="-5dp"
-        app:srcCompat="@drawable/settings"
+        app:srcCompat="@drawable/settings_blue"
         ></ImageButton>
     <ImageView
         android:id="@+id/imageView"

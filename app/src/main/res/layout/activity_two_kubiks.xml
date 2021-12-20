@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:id="@+id/layout_test"
     android:layout_height="match_parent"
-    android:background="@drawable/backgroundsecw"
+    android:background="@drawable/backgroundsecw_blue"
     tools:context=".two_kubiks"
     tools:ignore="ExtraText">
     <ImageButton
@@ -19,7 +19,7 @@
         android:adjustViewBounds="true"
         android:layout_alignParentRight="true"
         android:background="@null"
-        app:srcCompat="@drawable/settings"
+        app:srcCompat="@drawable/settings_blue"
         ></ImageButton>
     <ImageButton
         android:id="@+id/bbutton"
@@ -33,7 +33,7 @@
         android:scaleY="0.85"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="7dp"
-        app:srcCompat="@drawable/backbutton" />
+        app:srcCompat="@drawable/backbutton_blue" />
 
 
     <ImageButton
@@ -48,7 +48,7 @@
         android:scaleY="0.65"
         android:scaleX="0.65"
         android:layout_marginBottom="35dp"
-        app:srcCompat="@drawable/playbutton" />
+        app:srcCompat="@drawable/playbutton_blue" />
 
     <ImageView
         android:id="@+id/imageViewdown"
@@ -63,9 +63,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/imgviewone"
+        app:srcCompat="@drawable/diceuth"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp"
-        app:srcCompat="@drawable/diceuth" />
+        tools:layout_editor_absoluteY="0dp" />
 
 
 </RelativeLayout>
