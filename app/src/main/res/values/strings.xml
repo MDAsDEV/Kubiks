@@ -11,7 +11,9 @@
     <string name="onedice">TODO</string>
     <string name="startimg">TODO</string>
     <string-array name="colors">
+        <item>Голубой</item>
         <item>Зеленый</item>
-        <item>Розовый</item>
+        <item>Розовый</item>,
+        <item>Фиолетовый</item>
     </string-array>
 </resources>

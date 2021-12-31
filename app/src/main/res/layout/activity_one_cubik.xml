@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:id="@+id/one_kubik_relative_layout_id"
     android:layout_height="match_parent"
-    android:background="@drawable/backbutton_blue"
+    android:background="@drawable/backgroundsecw_blue"
     tools:context=".one_cubik"
     tools:ignore="ExtraText">
 
@@ -50,12 +50,13 @@
         android:layout_marginRight="-5dp"
         app:srcCompat="@drawable/settings_blue"
         ></ImageButton>
+
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:srcCompat="@drawable/diceth"
-        android:contentDescription="@string/onedice" />
+        android:contentDescription="@string/onedice"
+        app:srcCompat="@drawable/diceth_blue" />
 
 
 

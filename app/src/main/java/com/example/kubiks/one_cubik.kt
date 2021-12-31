@@ -3,7 +3,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import android.media.AudioAttributes
 import android.media.MediaPlayer
 import android.media.SoundPool
 import android.media.SoundPool.OnLoadCompleteListener
@@ -17,10 +16,9 @@ import android.view.animation.AnimationUtils
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.core.view.isVisible
 import kotlinx.android.synthetic.main.activity_one_cubik.*
+import kotlinx.android.synthetic.main.activity_two_kubiks.*
 import kotlin.random.Random
-import kotlin.system.exitProcess
 
 
 class one_cubik : AppCompatActivity(), OnLoadCompleteListener {
@@ -32,7 +30,7 @@ class one_cubik : AppCompatActivity(), OnLoadCompleteListener {
     public var leftVolume: Int = 1
     public var rightVolume: Int = 1
     private val SOUND_PREFERENCES_MODE = "sound"
-    private val BACKGROUND_PREFERENCES_MODE = "background"
+    private val BACKGROUND_PREFERENCE_MODE = "background"
     var is_mute_sound: Boolean = false
     private lateinit var prefs_sound: SharedPreferences
     private lateinit var prefs_background: SharedPreferences
@@ -40,15 +38,35 @@ class one_cubik : AppCompatActivity(), OnLoadCompleteListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_one_cubik)
-        val OneKubikLayout = findViewById<RelativeLayout>(R.id.one_kubik_relative_layout_id)
+        val OneKubiksLayout = findViewById<RelativeLayout>(R.id.one_kubik_relative_layout_id)
+        val OneKubiksPlayButton = findViewById<ImageButton>(R.id.pbutton)
+        val OneKubiksSettings = findViewById<ImageButton>(R.id.settings_button)
+        val OneKubiksBackButton = findViewById<ImageButton>(R.id.bbutton)
         prefs_sound = getSharedPreferences("sound_settings", Context.MODE_PRIVATE)
         prefs_background = getSharedPreferences("background_settings", Context.MODE_PRIVATE)
-
-        if (prefs_background.contains(BACKGROUND_PREFERENCES_MODE)){
-            val color_background = prefs_background.getString(BACKGROUND_PREFERENCES_MODE, "None")
+        if (prefs_background.contains(BACKGROUND_PREFERENCE_MODE)){
+            val color_background = prefs_background.getString(BACKGROUND_PREFERENCE_MODE, "None")
             Log.i("test colorba_one kubik ", color_background)
+            if (color_background == "Зеленый"){
+                OneKubiksLayout.setBackgroundResource(R.drawable.background_salad)
+                OneKubiksSettings.setImageResource(R.drawable.settings_green_transparent)
+                OneKubiksPlayButton.setImageResource(R.drawable.play_green_transparent)
+                OneKubiksBackButton.setImageResource(R.drawable.back_green_transparent)
+            }
             if (color_background == "Розовый"){
-                OneKubikLayout.setBackgroundResource(R.drawable.background_pink)
+                OneKubiksLayout.setBackgroundResource(R.drawable.background_pink)
+                OneKubiksPlayButton.setImageResource(R.drawable.play_pink)
+                OneKubiksSettings.setImageResource(R.drawable.settings_pink_transparent)
+                OneKubiksBackButton.setImageResource(R.drawable.back_pink_transparent)
+            }
+            if (color_background == "Голубой"){
+                OneKubiksLayout.setBackgroundResource(R.drawable.backgroundsecw_blue)
+            }
+            if (color_background == "Фиолетовый"){
+                OneKubiksLayout.setBackgroundResource(R.drawable.background_purple)
+                OneKubiksSettings.setImageResource(R.drawable.settings_purple_transparent)
+                OneKubiksBackButton.setImageResource(R.drawable.back_purple_transparent)
+                OneKubiksPlayButton.setImageResource(R.drawable.play_purple_transparent)
             }
         }
 
@@ -101,33 +119,229 @@ class one_cubik : AppCompatActivity(), OnLoadCompleteListener {
         val el: Int= Random.nextInt(1, 7)
         return (el)
     }
-    fun change_img_one(){
-        imageView.setImageDrawable(ContextCompat.getDrawable(applicationContext, R.drawable.diceo ))
+    fun change_img_one(CurrentColor: String){
+        if (CurrentColor == "Зеленый") {
+            imageView.setImageDrawable(
+                ContextCompat.getDrawable(
+                    applicationContext,
+                    R.drawable.diceo_green_transparent
+                )
+            )
+        }
+        else if (CurrentColor == "Голубой"){
+            imageView.setImageDrawable(
+                ContextCompat.getDrawable(
+                    applicationContext,
+                    R.drawable.diceo_blue
+                )
+            )
+        }
+        else if (CurrentColor == "Розовый") {
+            imageView.setImageDrawable(
+                ContextCompat.getDrawable(
+                    applicationContext,
+                    R.drawable.diceo_pink_transparent
+                )
+            )
+        }
+        else if (CurrentColor == "Фиолетовый"){
+            imageView.setImageDrawable(
+                ContextCompat.getDrawable(
+                    applicationContext,
+                    R.drawable.diceo_purple_transparent
+                )
+            )
+        }
     }
-    fun change_img_two(){
-        imageView.setImageDrawable(ContextCompat.getDrawable(applicationContext, R.drawable.dicet ))
+    fun change_img_two(CurrentColor: String){
+        if (CurrentColor == "Зеленый") {
+            imageView.setImageDrawable(
+                ContextCompat.getDrawable(
+                    applicationContext,
+                    R.drawable.dicet_green_transparent
+                )
+            )
+        }
+        else if (CurrentColor == "Голубой"){
+            imageView.setImageDrawable(
+                ContextCompat.getDrawable(
+                    applicationContext,
+                    R.drawable.dicet_blue
+                )
+            )
+        }
+        else if (CurrentColor == "Розовый") {
+            imageView.setImageDrawable(
+                ContextCompat.getDrawable(
+                    applicationContext,
+                    R.drawable.dicet_pink_transparent
+                )
+            )
+        }
+        else if (CurrentColor == "Фиолетовый"){
+            imageView.setImageDrawable(
+                ContextCompat.getDrawable(
+                    applicationContext,
+                    R.drawable.dicet_purple_transparent
+                )
+            )
+        }
     }
-    fun change_img_three(){
-        imageView.setImageDrawable(ContextCompat.getDrawable(applicationContext, R.drawable.diceth ))
+    fun change_img_three(CurrentColor: String){
+        if (CurrentColor == "Зеленый") {
+            imageView.setImageDrawable(
+                ContextCompat.getDrawable(
+                    applicationContext,
+                    R.drawable.diceth_green_transparent
+                )
+            )
+        }
+        else if (CurrentColor == "Голубой"){
+            imageView.setImageDrawable(
+                ContextCompat.getDrawable(
+                    applicationContext,
+                    R.drawable.diceth_blue
+                )
+            )
+        }
+        else if (CurrentColor == "Розовый") {
+            imageView.setImageDrawable(
+                ContextCompat.getDrawable(
+                    applicationContext,
+                    R.drawable.diceth_pink_transparent
+                )
+            )
+        }
+        else if (CurrentColor == "Фиолетовый"){
+            imageView.setImageDrawable(
+                ContextCompat.getDrawable(
+                    applicationContext,
+                    R.drawable.diceth_purple_transparent
+                )
+            )
+        }
     }
-    fun change_img_four(){
-        imageView.setImageDrawable(ContextCompat.getDrawable(applicationContext, R.drawable.dicef ))
+    fun change_img_four(CurrentColor: String){
+        if (CurrentColor == "Зеленый") {
+            imageView.setImageDrawable(
+                ContextCompat.getDrawable(
+                    applicationContext,
+                    R.drawable.dicef_green_transparent
+                )
+            )
+        }
+        else if (CurrentColor == "Голубой"){
+            imageView.setImageDrawable(
+                ContextCompat.getDrawable(
+                    applicationContext,
+                    R.drawable.dicef_blue
+                )
+            )
+        }
+        else if (CurrentColor == "Розовый") {
+            imageView.setImageDrawable(
+                ContextCompat.getDrawable(
+                    applicationContext,
+                    R.drawable.dicef_pink_transparent
+                )
+            )
+        }
+        else if (CurrentColor == "Фиолетовый"){
+            imageView.setImageDrawable(
+                ContextCompat.getDrawable(
+                    applicationContext,
+                    R.drawable.dicef_purple_transparent
+                )
+            )
+        }
     }
-    fun change_img_five(){
-        imageView.setImageDrawable(ContextCompat.getDrawable(applicationContext, R.drawable.dicefi ))
+    fun change_img_five(CurrentColor: String){
+        if (CurrentColor == "Зеленый") {
+            imageView.setImageDrawable(
+                ContextCompat.getDrawable(
+                    applicationContext,
+                    R.drawable.dicefi_green_transparent
+                )
+            )
+        }
+        else if (CurrentColor == "Голубой"){
+            imageView.setImageDrawable(
+                ContextCompat.getDrawable(
+                    applicationContext,
+                    R.drawable.dicefi_blue
+                )
+            )
+        }
+        else if (CurrentColor == "Розовый") {
+            imageView.setImageDrawable(
+                ContextCompat.getDrawable(
+                    applicationContext,
+                    R.drawable.dicefi_pink_transparent
+                )
+            )
+        }
+        else if (CurrentColor == "Фиолетовый"){
+            imageView.setImageDrawable(
+                ContextCompat.getDrawable(
+                    applicationContext,
+                    R.drawable.dicefi_purple_transparent
+                )
+            )
+        }
     }
-    fun change_img_six(){
-        imageView.setImageDrawable(ContextCompat.getDrawable(applicationContext, R.drawable.dices ))
+    fun change_img_six(CurrentColor: String){
+        if (CurrentColor == "Зеленый") {
+            imageView.setImageDrawable(
+                ContextCompat.getDrawable(
+                    applicationContext,
+                    R.drawable.dices_green_transparent_center
+                )
+            )
+        }
+        else if (CurrentColor == "Голубой"){
+            imageView.setImageDrawable(
+                ContextCompat.getDrawable(
+                    applicationContext,
+                    R.drawable.dices_blue
+                )
+            )
+        }
+        else if (CurrentColor == "Розовый") {
+            imageView.setImageDrawable(
+                ContextCompat.getDrawable(
+                    applicationContext,
+                    R.drawable.dices_pink_transparent_center
+                )
+            )
+        }
+        else if (CurrentColor == "Фиолетовый"){
+            imageView.setImageDrawable(
+                ContextCompat.getDrawable(
+                    applicationContext,
+                    R.drawable.dices_purple_transparent_center
+                )
+            )
+        }
+    }
+    fun get_color(): String {
+        prefs_background = getSharedPreferences("background_settings", Context.MODE_PRIVATE)
+        if (prefs_background.contains(BACKGROUND_PREFERENCE_MODE)) {
+            val color_background = prefs_background.getString(BACKGROUND_PREFERENCE_MODE, "None")
+            Log.i("test color background ", color_background)
+            return color_background.toString()
+        }
+        return ""
     }
     fun lets_play(){
         val nom: Int = rand_one()
+        val CurrentColor: String = get_color()
         when (rand_one()){
-            1 -> change_img_one()
-            2 -> change_img_two()
-            3 -> change_img_three()
-            4 -> change_img_four()
-            5 -> change_img_five()
-            6 -> change_img_six()
+            1 -> change_img_one(CurrentColor)
+            2 -> change_img_two(CurrentColor)
+            3 -> change_img_three(CurrentColor)
+            4 -> change_img_four(CurrentColor)
+            5 -> change_img_five(CurrentColor)
+            6 -> change_img_six(CurrentColor)
         }
     }
     fun play_sound(){
