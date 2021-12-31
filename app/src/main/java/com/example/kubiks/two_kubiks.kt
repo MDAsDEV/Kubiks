@@ -18,6 +18,7 @@ import android.widget.RelativeLayout
 import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_one_cubik.*
 import kotlinx.android.synthetic.main.activity_two_kubiks.*
+import kotlinx.android.synthetic.main.testdp.*
 import kotlin.random.Random
 
 class two_kubiks : AppCompatActivity() {
@@ -41,6 +42,8 @@ class two_kubiks : AppCompatActivity() {
         val TwoKubiksPlayButton = findViewById<ImageButton>(R.id.pbutton)
         val TwoKubiksSettingsButton = findViewById<ImageButton>(R.id.settings_button_2_kubiks)
         val TwoKubiksBackButton = findViewById<ImageButton>(R.id.bbutton)
+        val TwoKubiksImageViewDown = findViewById<ImageView>(R.id.imageViewdown)
+        val TwoKubiksImageViewUp = findViewById<ImageView>(R.id.imageViewup)
         //val TwoKubiksBackButton = findViewById<ImageButton>(R.id.)
         prefs_sound = getSharedPreferences("sound_settings", Context.MODE_PRIVATE)
         prefs_background = getSharedPreferences("background_settings" ,Context.MODE_PRIVATE)
@@ -51,6 +54,18 @@ class two_kubiks : AppCompatActivity() {
                 TwoKubiksLayout.setBackgroundResource(R.drawable.background_salad)
                 TwoKubiksSettingsButton.setImageResource(R.drawable.settings_green_transparent)
                 TwoKubiksPlayButton.setImageResource(R.drawable.play_green_transparent)
+                TwoKubiksImageViewUp.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        applicationContext,
+                        R.drawable.dicedth_green_transparent
+                    )
+                )
+                TwoKubiksImageViewDown.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        applicationContext,
+                        R.drawable.diceuth_green_transparent
+                    )
+                )
                 TwoKubiksBackButton.setImageResource(R.drawable.back_green_transparent)
             }
             if (color_background == "Розовый"){
@@ -58,6 +73,18 @@ class two_kubiks : AppCompatActivity() {
                 TwoKubiksPlayButton.setImageResource(R.drawable.play_pink)
                 TwoKubiksSettingsButton.setImageResource(R.drawable.settings_pink_transparent)
                 TwoKubiksBackButton.setImageResource(R.drawable.back_pink_transparent)
+                TwoKubiksImageViewUp.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        applicationContext,
+                        R.drawable.dicedth_pink_transparent
+                    )
+                )
+                TwoKubiksImageViewDown.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        applicationContext,
+                        R.drawable.diceuth_pink_transparent
+                    )
+                )
             }
             if (color_background == "Голубой"){
                 TwoKubiksLayout.setBackgroundResource(R.drawable.backgroundsecw_blue)
@@ -67,6 +94,18 @@ class two_kubiks : AppCompatActivity() {
                 TwoKubiksSettingsButton.setImageResource(R.drawable.settings_purple_transparent)
                 TwoKubiksBackButton.setImageResource(R.drawable.back_purple_transparent)
                 TwoKubiksPlayButton.setImageResource(R.drawable.play_purple_transparent)
+                TwoKubiksImageViewUp.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        applicationContext,
+                        R.drawable.dicedth_purple_transparent
+                    )
+                )
+                TwoKubiksImageViewDown.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        applicationContext,
+                        R.drawable.diceuth_purple_transparent
+                    )
+                )
             }
         }
         if (was == false) {
@@ -336,15 +375,15 @@ class two_kubiks : AppCompatActivity() {
     //один кубик!!
     fun change_img_one_dt(CurrentColor: String){
         if (CurrentColor == "Зеленый") {
-            imageViewup.setImageDrawable(
+            imageViewdown.setImageDrawable(
                 ContextCompat.getDrawable(
                     applicationContext,
-                    R.drawable.dices_green_transparent
+                    R.drawable.diceuo_green_transparent
                 )
             )
         }
         else if (CurrentColor == "Голубой"){
-            imageViewup.setImageDrawable(
+            imageViewdown.setImageDrawable(
                 ContextCompat.getDrawable(
                     applicationContext,
                     R.drawable.diceuo
@@ -352,15 +391,15 @@ class two_kubiks : AppCompatActivity() {
             )
         }
         else if (CurrentColor == "Розовый") {
-            imageViewup.setImageDrawable(
+            imageViewdown.setImageDrawable(
                 ContextCompat.getDrawable(
                     applicationContext,
-                    R.drawable.dicedo_pink_transparent
+                    R.drawable.diceuo_pink_transparent
                 )
             )
         }
         else if (CurrentColor == "Фиолетовый"){
-            imageViewup.setImageDrawable(
+            imageViewdown.setImageDrawable(
                 ContextCompat.getDrawable(
                     applicationContext,
                     R.drawable.diceuo_purple_transparent
@@ -370,15 +409,15 @@ class two_kubiks : AppCompatActivity() {
     }
     fun change_img_two_dt(CurrentColor: String){
         if (CurrentColor == "Зеленый") {
-            imageViewup.setImageDrawable(
+            imageViewdown.setImageDrawable(
                 ContextCompat.getDrawable(
                     applicationContext,
-                    R.drawable.dices_green_transparent
+                    R.drawable.diceut_green_transparent
                 )
             )
         }
         else if (CurrentColor == "Голубой"){
-            imageViewup.setImageDrawable(
+            imageViewdown.setImageDrawable(
                 ContextCompat.getDrawable(
                     applicationContext,
                     R.drawable.diceut
@@ -386,15 +425,15 @@ class two_kubiks : AppCompatActivity() {
             )
         }
         else if (CurrentColor == "Розовый") {
-            imageViewup.setImageDrawable(
+            imageViewdown.setImageDrawable(
                 ContextCompat.getDrawable(
                     applicationContext,
-                    R.drawable.dicedo_pink_transparent
+                    R.drawable.diceut_pink_transparent
                 )
             )
         }
         else if (CurrentColor == "Фиолетовый"){
-            imageViewup.setImageDrawable(
+            imageViewdown.setImageDrawable(
                 ContextCompat.getDrawable(
                     applicationContext,
                     R.drawable.diceut_purple_transparent
@@ -404,15 +443,15 @@ class two_kubiks : AppCompatActivity() {
     }
     fun change_img_three_dt(CurrentColor: String){
         if (CurrentColor == "Зеленый") {
-            imageViewup.setImageDrawable(
+            imageViewdown.setImageDrawable(
                 ContextCompat.getDrawable(
                     applicationContext,
-                    R.drawable.dices_green_transparent
+                    R.drawable.diceuth_green_transparent
                 )
             )
         }
         else if (CurrentColor == "Голубой"){
-            imageViewup.setImageDrawable(
+            imageViewdown.setImageDrawable(
                 ContextCompat.getDrawable(
                     applicationContext,
                     R.drawable.diceuth
@@ -420,49 +459,49 @@ class two_kubiks : AppCompatActivity() {
             )
         }
         else if (CurrentColor == "Розовый") {
-            imageViewup.setImageDrawable(
+            imageViewdown.setImageDrawable(
                 ContextCompat.getDrawable(
                     applicationContext,
-                    R.drawable.dicedo_pink_transparent
+                    R.drawable.diceuth_pink_transparent
                 )
             )
         }
         else if (CurrentColor == "Фиолетовый"){
-            imageViewup.setImageDrawable(
+            imageViewdown.setImageDrawable(
                 ContextCompat.getDrawable(
                     applicationContext,
-                    R.drawable.dicedth_purple_transparent
+                    R.drawable.diceuth_purple_transparent
                 )
             )
         }
     }
     fun change_img_four_dt(CurrentColor: String){
         if (CurrentColor == "Зеленый") {
-            imageViewup.setImageDrawable(
+            imageViewdown.setImageDrawable(
                 ContextCompat.getDrawable(
                     applicationContext,
-                    R.drawable.dices_green_transparent
+                    R.drawable.diceuf_green_transparent
                 )
             )
         }
         else if (CurrentColor == "Голубой"){
-            imageViewup.setImageDrawable(
+            imageViewdown.setImageDrawable(
                 ContextCompat.getDrawable(
                     applicationContext,
-                    R.drawable.diceuth
+                    R.drawable.diceuf
                 )
             )
         }
         else if (CurrentColor == "Розовый") {
-            imageViewup.setImageDrawable(
+            imageViewdown.setImageDrawable(
                 ContextCompat.getDrawable(
                     applicationContext,
-                    R.drawable.dicedo_pink_transparent
+                    R.drawable.diceuf_pink_transparent
                 )
             )
         }
         else if (CurrentColor == "Фиолетовый"){
-            imageViewup.setImageDrawable(
+            imageViewdown.setImageDrawable(
                 ContextCompat.getDrawable(
                     applicationContext,
                     R.drawable.diceuf_purple_transparent
@@ -472,15 +511,15 @@ class two_kubiks : AppCompatActivity() {
     }
     fun change_img_five_dt(CurrentColor: String){
         if (CurrentColor == "Зеленый") {
-            imageViewup.setImageDrawable(
+            imageViewdown.setImageDrawable(
                 ContextCompat.getDrawable(
                     applicationContext,
-                    R.drawable.dices_green_transparent
+                    R.drawable.diceufi_green_transparent
                 )
             )
         }
         else if (CurrentColor == "Голубой"){
-            imageViewup.setImageDrawable(
+            imageViewdown.setImageDrawable(
                 ContextCompat.getDrawable(
                     applicationContext,
                     R.drawable.diceufi
@@ -488,15 +527,15 @@ class two_kubiks : AppCompatActivity() {
             )
         }
         else if (CurrentColor == "Розовый") {
-            imageViewup.setImageDrawable(
+            imageViewdown.setImageDrawable(
                 ContextCompat.getDrawable(
                     applicationContext,
-                    R.drawable.dicedo_pink_transparent
+                    R.drawable.diceufi_pink_transparent
                 )
             )
         }
         else if (CurrentColor == "Фиолетовый"){
-            imageViewup.setImageDrawable(
+            imageViewdown.setImageDrawable(
                 ContextCompat.getDrawable(
                     applicationContext,
                     R.drawable.diceufi_purple_transparent
@@ -506,15 +545,15 @@ class two_kubiks : AppCompatActivity() {
     }
     fun change_img_six_dt(CurrentColor: String){
         if (CurrentColor == "Зеленый") {
-            imageViewup.setImageDrawable(
+            imageViewdown.setImageDrawable(
                 ContextCompat.getDrawable(
                     applicationContext,
-                    R.drawable.dices_green_transparent
+                    R.drawable.diceus_green_transparent
                 )
             )
         }
         else if (CurrentColor == "Голубой"){
-            imageViewup.setImageDrawable(
+            imageViewdown.setImageDrawable(
                 ContextCompat.getDrawable(
                     applicationContext,
                     R.drawable.diceus
@@ -522,15 +561,15 @@ class two_kubiks : AppCompatActivity() {
             )
         }
         else if (CurrentColor == "Розовый") {
-            imageViewup.setImageDrawable(
+            imageViewdown.setImageDrawable(
                 ContextCompat.getDrawable(
                     applicationContext,
-                    R.drawable.dicedo_pink_transparent
+                    R.drawable.diceus_pink_transparent
                 )
             )
         }
         else if (CurrentColor == "Фиолетовый"){
-            imageViewup.setImageDrawable(
+            imageViewdown.setImageDrawable(
                 ContextCompat.getDrawable(
                     applicationContext,
                     R.drawable.diceus_purple_transparent
