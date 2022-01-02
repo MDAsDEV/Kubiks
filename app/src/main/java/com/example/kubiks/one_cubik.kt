@@ -3,6 +3,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.media.Image
 import android.media.MediaPlayer
 import android.media.SoundPool
 import android.media.SoundPool.OnLoadCompleteListener
@@ -42,8 +43,9 @@ class one_cubik : AppCompatActivity(), OnLoadCompleteListener {
         val OneKubiksPlayButton = findViewById<ImageButton>(R.id.pbutton)
         val OneKubiksSettings = findViewById<ImageButton>(R.id.settings_button)
         val OneKubiksBackButton = findViewById<ImageButton>(R.id.bbutton)
-        prefs_sound = getSharedPreferences("sound_settings", Context.MODE_PRIVATE)
-        prefs_background = getSharedPreferences("background_settings", Context.MODE_PRIVATE)
+        val ImageViewObject = findViewById<ImageView>(R.id.imageView)
+        prefs_sound = getSharedPreferences("sound_settings", MODE_PRIVATE)
+        prefs_background = getSharedPreferences("background_settings", MODE_PRIVATE)
         if (prefs_background.contains(BACKGROUND_PREFERENCE_MODE)){
             val color_background = prefs_background.getString(BACKGROUND_PREFERENCE_MODE, "None")
             Log.i("test colorba_one kubik ", color_background)
@@ -52,12 +54,24 @@ class one_cubik : AppCompatActivity(), OnLoadCompleteListener {
                 OneKubiksSettings.setImageResource(R.drawable.settings_green_transparent)
                 OneKubiksPlayButton.setImageResource(R.drawable.play_green_transparent)
                 OneKubiksBackButton.setImageResource(R.drawable.back_green_transparent)
+                ImageViewObject.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        applicationContext,
+                        R.drawable.diceth_green_transparent
+                    )
+                )
             }
             if (color_background == "Розовый"){
                 OneKubiksLayout.setBackgroundResource(R.drawable.background_pink)
                 OneKubiksPlayButton.setImageResource(R.drawable.play_pink)
                 OneKubiksSettings.setImageResource(R.drawable.settings_pink_transparent)
                 OneKubiksBackButton.setImageResource(R.drawable.back_pink_transparent)
+                ImageViewObject.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        applicationContext,
+                        R.drawable.diceth_pink_transparent
+                    )
+                )
             }
             if (color_background == "Голубой"){
                 OneKubiksLayout.setBackgroundResource(R.drawable.backgroundsecw_blue)
@@ -67,6 +81,12 @@ class one_cubik : AppCompatActivity(), OnLoadCompleteListener {
                 OneKubiksSettings.setImageResource(R.drawable.settings_purple_transparent)
                 OneKubiksBackButton.setImageResource(R.drawable.back_purple_transparent)
                 OneKubiksPlayButton.setImageResource(R.drawable.play_purple_transparent)
+                ImageViewObject.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        applicationContext,
+                        R.drawable.diceth_purple_transparent
+                    )
+                )
             }
         }
 
