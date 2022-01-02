@@ -10,28 +10,65 @@
 
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/switch_sound"
+        android:theme="@style/SwitchCompatStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:layout_marginStart="250dp" />
+        android:layout_marginStart="250dp"
+        app:showText="true"
+        app:switchTextAppearance="@style/SwitchCompatTextStyle"
+        app:track="@drawable/switch_track" />
 
 
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/switch_language"
+        android:theme="@style/SwitchCompatStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/switch_sound"
         android:layout_marginTop="30dp"
+        app:track="@drawable/switch_track"
+        app:switchTextAppearance="@style/SwitchCompatTextStyle"
+        app:showText="true"
          />
 
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="3dp"
+        android:layout_weight=".28"
+        android:background="@drawable/background_spinner"
+        android:orientation="horizontal">
+
+        <Spinner
+            android:id="@+id/spinner2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:background="@android:color/transparent"
+            android:gravity="center"
+            android:layout_marginLeft="5dp"
+            android:spinnerMode="dropdown" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:src="@mipmap/down_arrow" />
+
+    </RelativeLayout>
     <Spinner
         android:id="@+id/spinner_choose_fone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/switch_language"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="100dp"
+        android:layout_marginTop="100dp"
         android:entries="@array/colors"></Spinner>
 
     <ImageButton

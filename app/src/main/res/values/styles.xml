@@ -5,4 +5,22 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="SwitchCompatStyle">
+        <item name="colorControlActivated">@color/light_green</item>
+        <item name="android:textOff">OFF</item>
+        <item name="android:textOn">ON</item>
+        <item name="android:switchMinWidth">80dp</item>
+        <item name="android:scaleY">2</item>
+        <item name="android:scaleX">2</item>
+    </style>
+
+    <style name="SwitchCompatTextStyle">
+        <item name="android:textSize">4dp</item>
+        <item name="android:textColor">@color/colorAccent</item>
+    </style>
+    <style name="spinnerItemStyle" parent="android:Widget.TextView.SpinnerItem">
+    </style>
+
+    <style name="spinnerDropDownItemStyle" parent="android:TextAppearance.Widget.TextView.SpinnerItem">
+    </style>
 </resources>
