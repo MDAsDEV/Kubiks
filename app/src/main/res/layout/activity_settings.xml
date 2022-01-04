@@ -19,7 +19,6 @@
         app:switchTextAppearance="@style/SwitchCompatTextStyle"
         app:track="@drawable/switch_track" />
 
-
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/switch_language"
         android:theme="@style/SwitchCompatStyle"
@@ -32,7 +31,14 @@
         app:switchTextAppearance="@style/SwitchCompatTextStyle"
         app:showText="true"
          />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/switch_language"
+        android:layout_marginTop="-40dp"
+        app:srcCompat="@drawable/engl_label"
 
+        ></ImageView>
 
     <Spinner
         android:id="@+id/spinner_choose_fone"

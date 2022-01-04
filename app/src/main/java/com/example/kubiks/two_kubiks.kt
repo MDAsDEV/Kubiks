@@ -29,9 +29,13 @@ class two_kubiks : AppCompatActivity() {
     public var rightVolume: Int = 1
     private val SOUND_PREFERENCES_MODE = "sound"
     private val BACKGROUND_PREFERENCE_MODE = "background"
+    private val LANGUAGE_PREFERENCE_MODE = "language"
+    lateinit var language_data: String
     var is_mute_sound: Boolean = false
+    private var is_english: Boolean = false
     private lateinit var prefs_sound: SharedPreferences
     private lateinit var prefs_background: SharedPreferences
+    private lateinit var prefs_language: SharedPreferences
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,13 +51,25 @@ class two_kubiks : AppCompatActivity() {
         //val TwoKubiksBackButton = findViewById<ImageButton>(R.id.)
         prefs_sound = getSharedPreferences("sound_settings", Context.MODE_PRIVATE)
         prefs_background = getSharedPreferences("background_settings" ,Context.MODE_PRIVATE)
+        prefs_language = getSharedPreferences("language_settings", Context.MODE_PRIVATE)
         if (prefs_background.contains(BACKGROUND_PREFERENCE_MODE)){
+            if (prefs_language.contains(LANGUAGE_PREFERENCE_MODE)){
+                language_data = prefs_language.getString(LANGUAGE_PREFERENCE_MODE, "None").toString()
+                is_english = ("eng" in language_data)
+            }
+            Log.i("language data == ", language_data)
+            Log.i("language data is english == ", is_english.toString())
             val color_background = prefs_background.getString(BACKGROUND_PREFERENCE_MODE, "None")
             Log.i("test color background ", color_background)
             if (color_background == "Зеленый"){
                 TwoKubiksLayout.setBackgroundResource(R.drawable.background_salad)
                 TwoKubiksSettingsButton.setImageResource(R.drawable.settings_green_transparent)
-                TwoKubiksPlayButton.setImageResource(R.drawable.play_green_transparent)
+                if (!is_english){
+                    TwoKubiksPlayButton.setImageResource(R.drawable.play_rus_green_transparent)
+                }
+                else {
+                    TwoKubiksPlayButton.setImageResource(R.drawable.play_green_transparent)
+                }
                 TwoKubiksImageViewUp.setImageDrawable(
                     ContextCompat.getDrawable(
                         applicationContext,
@@ -70,7 +86,12 @@ class two_kubiks : AppCompatActivity() {
             }
             if (color_background == "Розовый"){
                 TwoKubiksLayout.setBackgroundResource(R.drawable.background_pink)
-                TwoKubiksPlayButton.setImageResource(R.drawable.play_pink)
+                if (!is_english){
+                    TwoKubiksPlayButton.setImageResource(R.drawable.play_rus_pink_transparent)
+                }
+                else {
+                    TwoKubiksPlayButton.setImageResource(R.drawable.play_pink)
+                }
                 TwoKubiksSettingsButton.setImageResource(R.drawable.settings_pink_transparent)
                 TwoKubiksBackButton.setImageResource(R.drawable.back_pink_transparent)
                 TwoKubiksImageViewUp.setImageDrawable(
@@ -87,13 +108,25 @@ class two_kubiks : AppCompatActivity() {
                 )
             }
             if (color_background == "Голубой"){
+                if (!is_english){
+                    TwoKubiksPlayButton.setImageResource(R.drawable.play_rus_blue_transparent)
+                }
+                else {
+                    TwoKubiksPlayButton.setImageResource(R.drawable.playbutton_blue)
+                }
                 TwoKubiksLayout.setBackgroundResource(R.drawable.backgroundsecw_blue)
             }
             if (color_background == "Фиолетовый"){
                 TwoKubiksLayout.setBackgroundResource(R.drawable.background_purple)
-                TwoKubiksSettingsButton.setImageResource(R.drawable.settings_purple_transparent)
+                Log.i("background purple == ", "found purple")
                 TwoKubiksBackButton.setImageResource(R.drawable.back_purple_transparent)
-                TwoKubiksPlayButton.setImageResource(R.drawable.play_purple_transparent)
+                TwoKubiksSettingsButton.setImageResource(R.drawable.settings_purple_transparent)
+                if (!is_english){
+                    TwoKubiksPlayButton.setImageResource(R.drawable.play_rus_purple_transparent)
+                }
+                else {
+                    TwoKubiksPlayButton.setImageResource(R.drawable.play_purple_transparent)
+                }
                 TwoKubiksImageViewUp.setImageDrawable(
                     ContextCompat.getDrawable(
                         applicationContext,

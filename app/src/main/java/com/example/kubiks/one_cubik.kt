@@ -32,9 +32,13 @@ class one_cubik : AppCompatActivity(), OnLoadCompleteListener {
     public var rightVolume: Int = 1
     private val SOUND_PREFERENCES_MODE = "sound"
     private val BACKGROUND_PREFERENCE_MODE = "background"
+    private val LANGUAGE_PREFERENCE_MODE = "language"
+    lateinit var language_data: String
     var is_mute_sound: Boolean = false
+    private var is_english: Boolean = false
     private lateinit var prefs_sound: SharedPreferences
     private lateinit var prefs_background: SharedPreferences
+    private lateinit var prefs_language: SharedPreferences
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,13 +50,24 @@ class one_cubik : AppCompatActivity(), OnLoadCompleteListener {
         val ImageViewObject = findViewById<ImageView>(R.id.imageView)
         prefs_sound = getSharedPreferences("sound_settings", MODE_PRIVATE)
         prefs_background = getSharedPreferences("background_settings", MODE_PRIVATE)
+        prefs_language = getSharedPreferences("language_settings", MODE_PRIVATE)
         if (prefs_background.contains(BACKGROUND_PREFERENCE_MODE)){
+            if (prefs_language.contains(LANGUAGE_PREFERENCE_MODE)){
+                language_data = prefs_language.getString(LANGUAGE_PREFERENCE_MODE, "None").toString()
+                is_english = ("eng" in language_data)
+            }
+            Log.i("language data now == ", language_data)
             val color_background = prefs_background.getString(BACKGROUND_PREFERENCE_MODE, "None")
             Log.i("test colorba_one kubik ", color_background)
             if (color_background == "Зеленый"){
                 OneKubiksLayout.setBackgroundResource(R.drawable.background_salad)
                 OneKubiksSettings.setImageResource(R.drawable.settings_green_transparent)
-                OneKubiksPlayButton.setImageResource(R.drawable.play_green_transparent)
+                if (!is_english){
+                    OneKubiksPlayButton.setImageResource(R.drawable.play_rus_green_transparent)
+                }
+                else {
+                    OneKubiksPlayButton.setImageResource(R.drawable.play_green_transparent)
+                }
                 OneKubiksBackButton.setImageResource(R.drawable.back_green_transparent)
                 ImageViewObject.setImageDrawable(
                     ContextCompat.getDrawable(
@@ -63,7 +78,12 @@ class one_cubik : AppCompatActivity(), OnLoadCompleteListener {
             }
             if (color_background == "Розовый"){
                 OneKubiksLayout.setBackgroundResource(R.drawable.background_pink)
-                OneKubiksPlayButton.setImageResource(R.drawable.play_pink)
+                if (!is_english){
+                    OneKubiksPlayButton.setImageResource(R.drawable.play_rus_pink_transparent)
+                }
+                else {
+                    OneKubiksPlayButton.setImageResource(R.drawable.play_pink)
+                }
                 OneKubiksSettings.setImageResource(R.drawable.settings_pink_transparent)
                 OneKubiksBackButton.setImageResource(R.drawable.back_pink_transparent)
                 ImageViewObject.setImageDrawable(
@@ -74,13 +94,24 @@ class one_cubik : AppCompatActivity(), OnLoadCompleteListener {
                 )
             }
             if (color_background == "Голубой"){
+                if (!is_english){
+                    OneKubiksPlayButton.setImageResource(R.drawable.play_rus_blue_transparent)
+                }
+                else {
+                    OneKubiksPlayButton.setImageResource(R.drawable.playbutton_blue)
+                }
                 OneKubiksLayout.setBackgroundResource(R.drawable.backgroundsecw_blue)
             }
             if (color_background == "Фиолетовый"){
                 OneKubiksLayout.setBackgroundResource(R.drawable.background_purple)
                 OneKubiksSettings.setImageResource(R.drawable.settings_purple_transparent)
                 OneKubiksBackButton.setImageResource(R.drawable.back_purple_transparent)
-                OneKubiksPlayButton.setImageResource(R.drawable.play_purple_transparent)
+                if (!is_english){
+                    OneKubiksPlayButton.setImageResource(R.drawable.play_rus_purple_transparent)
+                }
+                else {
+                    OneKubiksPlayButton.setImageResource(R.drawable.play_purple_transparent)
+                }
                 ImageViewObject.setImageDrawable(
                     ContextCompat.getDrawable(
                         applicationContext,

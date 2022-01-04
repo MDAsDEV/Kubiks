@@ -25,24 +25,43 @@ import android.widget.Toast
 class settings : AppCompatActivity() {
     private val SOUND_PREFERENCES_MODE = "sound"
     private val BACKGROUND_PREFERENCE_MODE = "background"
+    private val LANGUAGE_PREFERENCE_MODE = "language"
+    var language_data: String = "rus"
     var is_mute_sound: Boolean = false
     var was = false
     private lateinit var prefs_sound: SharedPreferences
     private lateinit var prefs_background: SharedPreferences
+    private lateinit var prefs_language: SharedPreferences
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
         prefs_sound = getSharedPreferences("sound_settings", Context.MODE_PRIVATE)
         prefs_background = getSharedPreferences("background_settings" ,Context.MODE_PRIVATE)
+        prefs_language = getSharedPreferences("language_settings", Context.MODE_PRIVATE)
+        val AllColors = resources.getStringArray(R.array.colors)
         if (prefs_sound.contains(SOUND_PREFERENCES_MODE)) {
             is_mute_sound = prefs_sound.getBoolean(SOUND_PREFERENCES_MODE, false)
             Log.i("test music preferences", is_mute_sound.toString())
         }
-        val AllColors = resources.getStringArray(R.array.colors)
-
         if (prefs_background.contains(BACKGROUND_PREFERENCE_MODE)){
             val color_background = prefs_background.getString(BACKGROUND_PREFERENCE_MODE, "None")
             Log.i("test color background ", color_background)
+        }
+        if (prefs_language.contains(LANGUAGE_PREFERENCE_MODE)){
+            language_data = prefs_language.getString(LANGUAGE_PREFERENCE_MODE, "None").toString()
+            Log.i("test language data = =", language_data)
+        }
+        else{
+            Log.i("language data", "not found")
+            var prefs_language_edit = prefs_language.edit()
+            prefs_language_edit.putString(LANGUAGE_PREFERENCE_MODE, "rus").apply()
+            language_data = "rus"
+        }
+        val SwitchLanguage: SwitchCompat = findViewById<SwitchCompat>(R.id.switch_language)
+        SwitchLanguage.isChecked = "eng" in language_data
+        Log.i("start language data == ", ("eng" in language_data).toString())
+        SwitchLanguage.setOnCheckedChangeListener {
+            buttonView, isChecked -> change_language_mode()
         }
         // Необходимо добавить метод setSelection!!!
         val SwitchSound: SwitchCompat = findViewById<SwitchCompat>(R.id.switch_sound)
@@ -80,6 +99,20 @@ class settings : AppCompatActivity() {
 
             override fun onNothingSelected(parent: AdapterView<*>?) {}
         })
+    }
+
+    fun change_language_mode(){
+        Log.i("lang", "check")
+        if (prefs_language.contains(LANGUAGE_PREFERENCE_MODE)){
+            language_data = prefs_language.getString(LANGUAGE_PREFERENCE_MODE, "None").toString()
+            Log.i("lang found == ", language_data.toString())
+        }
+        Log.i("lang == ", language_data)
+        val edit_language_prefs = prefs_language.edit()
+        when (language_data){
+            "rus" -> edit_language_prefs.putString(LANGUAGE_PREFERENCE_MODE, "eng".toString()).apply()
+            "eng" -> edit_language_prefs.putString(LANGUAGE_PREFERENCE_MODE, "rus".toString()).apply()
+        }
     }
 
     fun change_sound_mode(){
