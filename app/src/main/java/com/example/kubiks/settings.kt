@@ -33,11 +33,17 @@ class settings : AppCompatActivity() {
     private lateinit var prefs_background: SharedPreferences
     private lateinit var prefs_language: SharedPreferences
     override fun onCreate(savedInstanceState: Bundle?) {
+        Log.i("check error creating activity", "Successfull")
         super.onCreate(savedInstanceState)
+        Log.i("check error creating activity2", "Successfull")
         setContentView(R.layout.activity_settings)
+        Log.i("check error creating activity3", "Successfull")
         prefs_sound = getSharedPreferences("sound_settings", Context.MODE_PRIVATE)
+        Log.i("check error creating activity4", "Successfull")
         prefs_background = getSharedPreferences("background_settings" ,Context.MODE_PRIVATE)
+        Log.i("check error creating activity5", "Successfull")
         prefs_language = getSharedPreferences("language_settings", Context.MODE_PRIVATE)
+        Log.i("check error creating activity6", "Successfull")
         val AllColors = resources.getStringArray(R.array.colors)
         if (prefs_sound.contains(SOUND_PREFERENCES_MODE)) {
             is_mute_sound = prefs_sound.getBoolean(SOUND_PREFERENCES_MODE, false)
@@ -69,6 +75,7 @@ class settings : AppCompatActivity() {
         SwitchSound.setOnCheckedChangeListener { buttonView, isChecked ->
             change_sound_mode()
         }
+
         val button_back_id = findViewById<ImageButton>(R.id.homeBackButton) as ImageButton
         if (was == false) {
             button_back_id.setOnTouchListener(object : View.OnTouchListener {
@@ -80,7 +87,22 @@ class settings : AppCompatActivity() {
                 }
             })
         }
+        Log.i("check error creating activity7", "Succesfull")
         val spinner_object = findViewById<Spinner>(R.id.spinner_choose_fone)
+        Log.i("language data check error == ", language_data)
+        if ("eng" in language_data){
+            var Data = resources.getStringArray(R.array.colors_eng)
+            Log.i("data DATA eng == ", Data.toString())
+            var DataArrayAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, Data)
+            spinner_object.adapter = DataArrayAdapter
+        }
+        else
+        {
+            var Data = resources.getStringArray(R.array.colors)
+            Log.i("data DATA rus == ", Data.toString())
+            var DataArrayAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, Data)
+            spinner_object.adapter = DataArrayAdapter
+        }
         if (prefs_background.contains(BACKGROUND_PREFERENCE_MODE)){
             val color_background = prefs_background.getString(BACKGROUND_PREFERENCE_MODE, "None")
             val color_background_id = AllColors.indexOf(color_background)

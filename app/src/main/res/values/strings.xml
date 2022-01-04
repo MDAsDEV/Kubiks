@@ -16,4 +16,10 @@
         <item>Розовый</item>,
         <item>Фиолетовый</item>
     </string-array>
+    <string-array name="colors_eng">
+        <item>Blue</item>
+        <item>Green</item>
+        <item>Pink</item>
+        <item>Purple</item>
+    </string-array>
 </resources>
