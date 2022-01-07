@@ -44,7 +44,9 @@ class settings : AppCompatActivity() {
         Log.i("check error creating activity5", "Successfull")
         prefs_language = getSharedPreferences("language_settings", Context.MODE_PRIVATE)
         Log.i("check error creating activity6", "Successfull")
+        val LayoutSettings = findViewById<RelativeLayout>(R.id.settings_layout)
         val AllColors = resources.getStringArray(R.array.colors)
+        val AllLanguages = resources.getStringArray(R.array.languages)
         if (prefs_sound.contains(SOUND_PREFERENCES_MODE)) {
             is_mute_sound = prefs_sound.getBoolean(SOUND_PREFERENCES_MODE, false)
             Log.i("test music preferences", is_mute_sound.toString())
@@ -52,6 +54,9 @@ class settings : AppCompatActivity() {
         if (prefs_background.contains(BACKGROUND_PREFERENCE_MODE)){
             val color_background = prefs_background.getString(BACKGROUND_PREFERENCE_MODE, "None")
             Log.i("test color background ", color_background)
+            if (color_background == "Зеленый"){
+                LayoutSettings.setBackgroundResource(R.drawable.background_salad)
+            }
         }
         if (prefs_language.contains(LANGUAGE_PREFERENCE_MODE)){
             language_data = prefs_language.getString(LANGUAGE_PREFERENCE_MODE, "None").toString()
@@ -63,13 +68,6 @@ class settings : AppCompatActivity() {
             prefs_language_edit.putString(LANGUAGE_PREFERENCE_MODE, "rus").apply()
             language_data = "rus"
         }
-        val SwitchLanguage: SwitchCompat = findViewById<SwitchCompat>(R.id.switch_language)
-        SwitchLanguage.isChecked = "eng" in language_data
-        Log.i("start language data == ", ("eng" in language_data).toString())
-        SwitchLanguage.setOnCheckedChangeListener {
-            buttonView, isChecked -> change_language_mode()
-        }
-        // Необходимо добавить метод setSelection!!!
         val SwitchSound: SwitchCompat = findViewById<SwitchCompat>(R.id.switch_sound)
         SwitchSound.isChecked = !is_mute_sound
         SwitchSound.setOnCheckedChangeListener { buttonView, isChecked ->
@@ -89,12 +87,14 @@ class settings : AppCompatActivity() {
         }
         Log.i("check error creating activity7", "Succesfull")
         val spinner_object = findViewById<Spinner>(R.id.spinner_choose_fone)
+        val SpinnerLanguage: Spinner = findViewById<Spinner>(R.id.spinner_language)
         Log.i("language data check error == ", language_data)
         if ("eng" in language_data){
-            var Data = resources.getStringArray(R.array.colors_eng)
-            Log.i("data DATA eng == ", Data.toString())
-            var DataArrayAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, Data)
+            var DataColors = resources.getStringArray(R.array.colors_eng)
+            Log.i("data DATA eng == ", DataColors.toString())
+            var DataArrayAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, DataColors)
             spinner_object.adapter = DataArrayAdapter
+            SpinnerLanguage.setSelection(1)
         }
         else
         {
@@ -102,10 +102,12 @@ class settings : AppCompatActivity() {
             Log.i("data DATA rus == ", Data.toString())
             var DataArrayAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, Data)
             spinner_object.adapter = DataArrayAdapter
+            SpinnerLanguage.setSelection(0)
         }
         if (prefs_background.contains(BACKGROUND_PREFERENCE_MODE)){
             val color_background = prefs_background.getString(BACKGROUND_PREFERENCE_MODE, "None")
             val color_background_id = AllColors.indexOf(color_background)
+            Log.i("color background id == ", color_background_id.toString())
             spinner_object.setSelection(color_background_id)
         }
         spinner_object.setOnItemSelectedListener(object : OnItemSelectedListener {
@@ -121,20 +123,28 @@ class settings : AppCompatActivity() {
 
             override fun onNothingSelected(parent: AdapterView<*>?) {}
         })
+        SpinnerLanguage.setOnItemSelectedListener(object : OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                itemSelected: View, selectedItemPosition: Int, selectedId: Long
+            ) {
+                Log.i("Selected Item language == ", selectedItemPosition.toString())
+                if (selectedItemPosition == 1){
+                change_language_mode("eng")
+                }
+                else{
+                    change_language_mode("rus")
+                }
+
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+        })
     }
 
-    fun change_language_mode(){
-        Log.i("lang", "check")
-        if (prefs_language.contains(LANGUAGE_PREFERENCE_MODE)){
-            language_data = prefs_language.getString(LANGUAGE_PREFERENCE_MODE, "None").toString()
-            Log.i("lang found == ", language_data.toString())
-        }
-        Log.i("lang == ", language_data)
+    fun change_language_mode(NewLang: String){
         val edit_language_prefs = prefs_language.edit()
-        when (language_data){
-            "rus" -> edit_language_prefs.putString(LANGUAGE_PREFERENCE_MODE, "eng".toString()).apply()
-            "eng" -> edit_language_prefs.putString(LANGUAGE_PREFERENCE_MODE, "rus".toString()).apply()
-        }
+        edit_language_prefs.putString(LANGUAGE_PREFERENCE_MODE, NewLang.toString()).apply()
     }
 
     fun change_sound_mode(){

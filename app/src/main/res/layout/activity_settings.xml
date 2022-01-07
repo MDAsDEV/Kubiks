@@ -5,32 +5,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/settings_layout"
     android:background="@drawable/settings_empty_phone"
     tools:context=".settings">
 
-    <androidx.appcompat.widget.SwitchCompat
-        android:id="@+id/switch_sound"
-        android:theme="@style/SwitchCompatStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_marginStart="250dp"
-        app:showText="true"
-        app:switchTextAppearance="@style/SwitchCompatTextStyle"
-        app:track="@drawable/switch_track" />
 
-    <androidx.appcompat.widget.SwitchCompat
-        android:id="@+id/switch_language"
-        android:theme="@style/SwitchCompatStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/switch_sound"
-        android:layout_marginTop="30dp"
-        app:track="@drawable/switch_track"
-        app:switchTextAppearance="@style/SwitchCompatTextStyle"
-        app:showText="true"
-         />
+        <TextView
+            android:id="@+id/test_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginStart="50dp"
+            android:text="SOUND"
+            android:textSize="20dp"
+            ></TextView>
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/switch_sound"
+            android:theme="@style/SwitchCompatStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            app:showText="true"
+            app:switchTextAppearance="@style/SwitchCompatTextStyle"
+            app:track="@drawable/switch_track" />
+
+
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -41,13 +42,24 @@
         ></ImageView>
 
     <Spinner
+        android:id="@+id/spinner_language"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/switch_language"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="35dp"
+        android:minWidth="150dp"
+        android:background="@drawable/check_shape"
+        android:entries="@array/languages"></Spinner>
+
+    <Spinner
         android:id="@+id/spinner_choose_fone"
         android:layout_width="wrap_content"
-        android:background="@drawable/check_shape"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_below="@+id/switch_language"
-        android:layout_marginTop="30dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/check_shape"
         android:entries="@array/colors"></Spinner>
 
     <ImageButton
