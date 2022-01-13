@@ -1,10 +1,10 @@
 package com.example.kubiks
-
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
@@ -16,9 +16,9 @@ import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_settings.*
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
-
 import android.widget.Toast
-
+import java.util.Timer
+import kotlin.concurrent.schedule
 
 
 
@@ -32,17 +32,19 @@ class settings : AppCompatActivity() {
     private lateinit var prefs_sound: SharedPreferences
     private lateinit var prefs_background: SharedPreferences
     private lateinit var prefs_language: SharedPreferences
+    lateinit var spinner_object: Spinner
+    lateinit var SpinnerLanguage: Spinner
     override fun onCreate(savedInstanceState: Bundle?) {
         Log.i("check error creating activity", "Successfull")
         super.onCreate(savedInstanceState)
         Log.i("check error creating activity2", "Successfull")
         setContentView(R.layout.activity_settings)
         Log.i("check error creating activity3", "Successfull")
-        prefs_sound = getSharedPreferences("sound_settings", Context.MODE_PRIVATE)
+        prefs_sound = getSharedPreferences("sound_settings", MODE_PRIVATE)
         Log.i("check error creating activity4", "Successfull")
-        prefs_background = getSharedPreferences("background_settings" ,Context.MODE_PRIVATE)
+        prefs_background = getSharedPreferences("background_settings" , MODE_PRIVATE)
         Log.i("check error creating activity5", "Successfull")
-        prefs_language = getSharedPreferences("language_settings", Context.MODE_PRIVATE)
+        prefs_language = getSharedPreferences("language_settings", MODE_PRIVATE)
         Log.i("check error creating activity6", "Successfull")
         val LayoutSettings = findViewById<RelativeLayout>(R.id.settings_layout)
         val AllColors = resources.getStringArray(R.array.colors)
@@ -86,8 +88,8 @@ class settings : AppCompatActivity() {
             })
         }
         Log.i("check error creating activity7", "Succesfull")
-        val spinner_object = findViewById<Spinner>(R.id.spinner_choose_fone)
-        val SpinnerLanguage: Spinner = findViewById<Spinner>(R.id.spinner_language)
+        spinner_object = findViewById<Spinner>(R.id.spinner_choose_fone)
+        SpinnerLanguage = findViewById<Spinner>(R.id.spinner_language)
         Log.i("language data check error == ", language_data)
         if ("eng" in language_data){
             var DataColors = resources.getStringArray(R.array.colors_eng)
@@ -95,6 +97,10 @@ class settings : AppCompatActivity() {
             var DataArrayAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, DataColors)
             spinner_object.adapter = DataArrayAdapter
             SpinnerLanguage.setSelection(1)
+            SpinnerLanguage.prompt = "Choose Language"
+            Log.i("test spinner language eng == ", R.string.prompt_language_eng.toString())
+            spinner_object.prompt = "Choose background color"
+            Log.i("test spinner phone eng == ", R.string.prompt_phone_eng.toString())
         }
         else
         {
@@ -103,6 +109,10 @@ class settings : AppCompatActivity() {
             var DataArrayAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, Data)
             spinner_object.adapter = DataArrayAdapter
             SpinnerLanguage.setSelection(0)
+            SpinnerLanguage.prompt = "Выберите язык"
+            Log.i("test spinner language == ", R.string.prompt_language_rus.toString())
+            spinner_object.prompt = "Выберите цвет фона"
+            Log.i("test phone language == ", R.string.prompt_phone_rus.toString())
         }
         if (prefs_background.contains(BACKGROUND_PREFERENCE_MODE)){
             val color_background = prefs_background.getString(BACKGROUND_PREFERENCE_MODE, "None")
@@ -110,14 +120,17 @@ class settings : AppCompatActivity() {
             Log.i("color background id == ", color_background_id.toString())
             spinner_object.setSelection(color_background_id)
         }
-        spinner_object.setOnItemSelectedListener(object : OnItemSelectedListener {
+        var check: Int = 0
+            spinner_object.setOnItemSelectedListener(object : OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>?,
                 itemSelected: View, selectedItemPosition: Int, selectedId: Long
             ) {
                 Log.i("Selected Item Poion == ", selectedItemPosition.toString())
                 val CurrentBackgroundColor = AllColors.get(selectedItemPosition)
+
                 changeBackgroundMode(CurrentBackgroundColor)
+
 
             }
 
@@ -127,14 +140,25 @@ class settings : AppCompatActivity() {
             override fun onItemSelected(
                 parent: AdapterView<*>?,
                 itemSelected: View, selectedItemPosition: Int, selectedId: Long
-            ) {
-                Log.i("Selected Item language == ", selectedItemPosition.toString())
-                if (selectedItemPosition == 1){
-                change_language_mode("eng")
-                }
-                else{
-                    change_language_mode("rus")
-                }
+            )
+            {
+                    Log.i("Selected Item language == ", selectedItemPosition.toString())
+                        if (selectedItemPosition == 1) {
+                        change_language_mode("eng")
+                    }
+                    else {
+                        change_language_mode("rus")
+                    }
+                Log.i("check23 == ", check.toString())
+                if (++check > 1){
+                    Log.i("check23 > 1 == ", check.toString())
+                    val handler = Handler()
+                    finish();
+                    overridePendingTransition(0, 0);
+                    startActivity(getIntent());
+                    overridePendingTransition(0, 0);
+                    check += 1
+                    }
 
             }
 
@@ -143,6 +167,8 @@ class settings : AppCompatActivity() {
     }
 
     fun change_language_mode(NewLang: String){
+        Log.i("language mode", "we are here")
+        Log.i("language data == ", NewLang)
         val edit_language_prefs = prefs_language.edit()
         edit_language_prefs.putString(LANGUAGE_PREFERENCE_MODE, NewLang.toString()).apply()
     }

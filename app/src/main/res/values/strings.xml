@@ -10,6 +10,10 @@
     <string name="imgviewone">TODO</string>
     <string name="onedice">TODO</string>
     <string name="startimg">TODO</string>
+    <string name="prompt_language_rus">Выберите язык</string>
+    <string name="prompt_language_eng">Choose language</string>
+    <string name="prompt_phone_rus">Выберите фон</string>
+    <string name="prompt_phone_eng">Choose phone</string>
     <string-array name="colors">
         <item>Голубой</item>
         <item>Зеленый</item>
