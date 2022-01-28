@@ -6,19 +6,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/settings_layout"
-    android:background="@drawable/settings_empty_phone"
+    android:background="@drawable/background_pink_settings"
     tools:context=".settings">
 
 
-    <TextView
-        android:id="@+id/test_txt"
+
+
+
+    <Spinner
+        android:id="@+id/spinner_language"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true"
-        android:layout_marginStart="50dp"
-        android:text="SOUND"
-        android:textSize="20dp"></TextView>
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="200dp"
+        android:background="@drawable/check_shape"
+        android:entries="@array/languages"
+        android:minWidth="170dp"
+        android:minHeight="35dp"
+        android:theme="@style/SpinnerTextStyle"
+        android:spinnerMode="dialog"></Spinner>
 
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/switch_sound"
@@ -27,28 +33,28 @@
         android:layout_centerInParent="true"
         android:theme="@style/SwitchCompatStyle"
         app:showText="true"
+        android:layout_below="@+id/spinner_choose_fone"
+        android:layout_alignRight="@+id/spinner_language"
         app:switchTextAppearance="@style/SwitchCompatTextStyle"
-        app:track="@drawable/switch_track" />
+        app:track="@drawable/switch_track"
+        android:layout_marginTop="50dp"
+        />
 
-
-    <ImageView
+    <TextView
+        android:id="@+id/textview_sound"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="-40dp"
-        app:srcCompat="@drawable/engl_label"
-        ></ImageView>
-
-    <Spinner
-        android:id="@+id/spinner_language"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="35dp"
-        android:background="@drawable/check_shape"
-        android:entries="@array/languages"
-        android:minWidth="150dp"
-        android:minHeight="35dp"
-        android:spinnerMode="dialog"></Spinner>
+        android:layout_below="@+id/spinner_choose_fone"
+        android:layout_alignLeft="@id/spinner_language"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="50dp"
+        android:layout_toLeftOf="@id/switch_sound"
+        android:fontFamily="@font/yakumopreschoolhand"
+        android:text="SOUND"
+        android:letterSpacing="0.1"
+        android:textColor="@color/brown"
+        android:textSize="25dp"
+        android:textStyle="bold"></TextView>
 
     <Spinner
         android:id="@+id/spinner_choose_fone"
@@ -56,12 +62,14 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/spinner_language"
         android:layout_centerHorizontal="true"
-        android:spinnerMode="dialog"
-        android:minHeight="35dp"
-        android:minWidth="150dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="50dp"
         android:background="@drawable/check_shape"
-        android:entries="@array/colors"></Spinner>
+        android:entries="@array/colors"
+        android:minWidth="170dp"
+        android:minHeight="35dp"
+        android:theme="@style/SpinnerTextStyle"
+        android:spinnerMode="dialog"
+        ></Spinner>
 
     <ImageButton
         android:id="@+id/homeBackButton"
@@ -69,10 +77,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:background="@null"
         android:scaleType="fitCenter"
         android:scaleX="0.5"
         android:scaleY="0.5"
-        app:srcCompat="@drawable/home_button"></ImageButton>
+        app:srcCompat="@drawable/home_button_current_color"></ImageButton>
 
 </RelativeLayout>

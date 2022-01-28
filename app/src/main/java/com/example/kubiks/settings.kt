@@ -35,17 +35,11 @@ class settings : AppCompatActivity() {
     lateinit var spinner_object: Spinner
     lateinit var SpinnerLanguage: Spinner
     override fun onCreate(savedInstanceState: Bundle?) {
-        Log.i("check error creating activity", "Successfull")
         super.onCreate(savedInstanceState)
-        Log.i("check error creating activity2", "Successfull")
         setContentView(R.layout.activity_settings)
-        Log.i("check error creating activity3", "Successfull")
         prefs_sound = getSharedPreferences("sound_settings", MODE_PRIVATE)
-        Log.i("check error creating activity4", "Successfull")
         prefs_background = getSharedPreferences("background_settings" , MODE_PRIVATE)
-        Log.i("check error creating activity5", "Successfull")
         prefs_language = getSharedPreferences("language_settings", MODE_PRIVATE)
-        Log.i("check error creating activity6", "Successfull")
         val LayoutSettings = findViewById<RelativeLayout>(R.id.settings_layout)
         val AllColors = resources.getStringArray(R.array.colors)
         val AllLanguages = resources.getStringArray(R.array.languages)
@@ -95,6 +89,8 @@ class settings : AppCompatActivity() {
             var DataColors = resources.getStringArray(R.array.colors_eng)
             Log.i("data DATA eng == ", DataColors.toString())
             var DataArrayAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, DataColors)
+            var TextViewSound = findViewById<TextView>(R.id.textview_sound)
+            TextViewSound.setText(R.string.sound_textview_eng)
             spinner_object.adapter = DataArrayAdapter
             SpinnerLanguage.setSelection(1)
             SpinnerLanguage.prompt = "Choose Language"
@@ -109,6 +105,8 @@ class settings : AppCompatActivity() {
             var DataArrayAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, Data)
             spinner_object.adapter = DataArrayAdapter
             SpinnerLanguage.setSelection(0)
+            var TextViewSound = findViewById<TextView>(R.id.textview_sound)
+            TextViewSound.setText(R.string.sound_textview_rus)
             SpinnerLanguage.prompt = "Выберите язык"
             Log.i("test spinner language == ", R.string.prompt_language_rus.toString())
             spinner_object.prompt = "Выберите цвет фона"

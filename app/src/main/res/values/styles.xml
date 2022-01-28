@@ -9,9 +9,23 @@
         <item name="colorControlActivated">@color/light_green</item>
         <item name="android:textOff">OFF</item>
         <item name="android:textOn">ON</item>
-        <item name="android:switchMinWidth">80dp</item>
-        <item name="android:scaleY">2</item>
-        <item name="android:scaleX">2</item>
+        <item name="android:switchMinWidth">150dp</item>
+        <item name="android:colorBackground">@color/white</item>
+        <item name="android:color">@color/white</item>
+        <item name="android:fillColor">@color/white</item>
+        <item name="android:radius">0.04dp</item>
+    </style>
+
+    <style name="SpinnerPromptStyle">
+        <item name="android:textColor">@color/brown</item>
+    </style>
+
+    <style name="SpinnerTextStyle">
+        <item name="android:textSize">25dp</item>
+        <item name="android:fontFamily">@font/yakumopreschoolhand</item>
+        <item name="android:letterSpacing">0.1</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/brown</item>
     </style>
 
     <style name="SwitchCompatTextStyle">
