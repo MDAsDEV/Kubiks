@@ -19,9 +19,11 @@ import androidx.core.view.isVisible
 class MainActivity : AppCompatActivity() {
 
     private lateinit var prefs: SharedPreferences
+    private lateinit var prefs_language: SharedPreferences
     private val APP_PREFERENCES_COUNTER = "counter"
-
+    private val LANGUAGE_PREFERENCE_MODE = "language"
     private var was_first_screen: Int = 0
+    var language_data: String = "rus"
 
     var was = false
     @SuppressLint("ClickableViewAccessibility")
@@ -30,6 +32,24 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         prefs =
             getSharedPreferences("settings", Context.MODE_PRIVATE)
+        var ClickView = findViewById<ImageView>(R.id.click)
+        prefs_language = getSharedPreferences("language_settings", MODE_PRIVATE)
+        if (prefs_language.contains(LANGUAGE_PREFERENCE_MODE)){
+            language_data = prefs_language.getString(LANGUAGE_PREFERENCE_MODE, "None").toString()
+            Log.i("test language data = =", language_data)
+        }
+        else{
+            Log.i("language data", "not found")
+            var prefs_language_edit = prefs_language.edit()
+            prefs_language_edit.putString(LANGUAGE_PREFERENCE_MODE, "rus").apply()
+            language_data = "eng"
+        }
+        if ("eng" in language_data){
+            ClickView.setImageResource(R.drawable.click_buttons_to_start)
+        }
+        else{
+            ClickView.setImageResource(R.drawable.click_buttons_to_start_rus)
+        }
         val start_phone = findViewById(R.id.click) as ImageView;
         start_phone.setOnTouchListener(object : View.OnTouchListener {
             override fun onTouch(v: View?, event: MotionEvent?): Boolean {

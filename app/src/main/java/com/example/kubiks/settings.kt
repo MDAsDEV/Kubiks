@@ -2,12 +2,15 @@ package com.example.kubiks
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.Paint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.provider.ContactsContract
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
+import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.*
@@ -19,6 +22,10 @@ import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.Toast
 import java.util.Timer
 import kotlin.concurrent.schedule
+import android.widget.ArrayAdapter
+
+
+
 
 
 
@@ -40,6 +47,7 @@ class settings : AppCompatActivity() {
         prefs_sound = getSharedPreferences("sound_settings", MODE_PRIVATE)
         prefs_background = getSharedPreferences("background_settings" , MODE_PRIVATE)
         prefs_language = getSharedPreferences("language_settings", MODE_PRIVATE)
+        val SwitchSound: SwitchCompat = findViewById<SwitchCompat>(R.id.switch_sound)
         val LayoutSettings = findViewById<RelativeLayout>(R.id.settings_layout)
         val AllColors = resources.getStringArray(R.array.colors)
         val AllLanguages = resources.getStringArray(R.array.languages)
@@ -50,9 +58,6 @@ class settings : AppCompatActivity() {
         if (prefs_background.contains(BACKGROUND_PREFERENCE_MODE)){
             val color_background = prefs_background.getString(BACKGROUND_PREFERENCE_MODE, "None")
             Log.i("test color background ", color_background)
-            if (color_background == "Зеленый"){
-                LayoutSettings.setBackgroundResource(R.drawable.background_salad)
-            }
         }
         if (prefs_language.contains(LANGUAGE_PREFERENCE_MODE)){
             language_data = prefs_language.getString(LANGUAGE_PREFERENCE_MODE, "None").toString()
@@ -64,7 +69,6 @@ class settings : AppCompatActivity() {
             prefs_language_edit.putString(LANGUAGE_PREFERENCE_MODE, "rus").apply()
             language_data = "rus"
         }
-        val SwitchSound: SwitchCompat = findViewById<SwitchCompat>(R.id.switch_sound)
         SwitchSound.isChecked = !is_mute_sound
         SwitchSound.setOnCheckedChangeListener { buttonView, isChecked ->
             change_sound_mode()
@@ -86,23 +90,32 @@ class settings : AppCompatActivity() {
         SpinnerLanguage = findViewById<Spinner>(R.id.spinner_language)
         Log.i("language data check error == ", language_data)
         if ("eng" in language_data){
+            button_back_id.setImageResource(R.drawable.home_button_border_eng)
+            SwitchSound.textOff = "OFF"
+            SwitchSound.textOn = "ON"
             var DataColors = resources.getStringArray(R.array.colors_eng)
             Log.i("data DATA eng == ", DataColors.toString())
-            var DataArrayAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, DataColors)
+            var DataArrayAdapter = ArrayAdapter.createFromResource(this, R.array.colors_eng,
+            R.layout.myspinner)
             var TextViewSound = findViewById<TextView>(R.id.textview_sound)
             TextViewSound.setText(R.string.sound_textview_eng)
             spinner_object.adapter = DataArrayAdapter
-            SpinnerLanguage.setSelection(1)
             SpinnerLanguage.prompt = "Choose Language"
+            SpinnerLanguage.setSelection(1)
             Log.i("test spinner language eng == ", R.string.prompt_language_eng.toString())
             spinner_object.prompt = "Choose background color"
             Log.i("test spinner phone eng == ", R.string.prompt_phone_eng.toString())
         }
         else
         {
+            button_back_id.setImageResource(R.drawable.home_button_border_rus)
+            SwitchSound.textOff = "ВЫКЛ"
+            SwitchSound.textOn = "ВКЛ"
             var Data = resources.getStringArray(R.array.colors)
             Log.i("data DATA rus == ", Data.toString())
-            var DataArrayAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, Data)
+            var DataArrayAdapter = ArrayAdapter.createFromResource(this, R.array.colors,
+                R.layout.myspinner)
+            DataArrayAdapter.setDropDownViewResource(R.layout.myspinner)
             spinner_object.adapter = DataArrayAdapter
             SpinnerLanguage.setSelection(0)
             var TextViewSound = findViewById<TextView>(R.id.textview_sound)
@@ -163,6 +176,7 @@ class settings : AppCompatActivity() {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
         })
     }
+
 
     fun change_language_mode(NewLang: String){
         Log.i("language mode", "we are here")

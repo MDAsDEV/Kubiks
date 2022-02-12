@@ -6,13 +6,15 @@
     </style>
 
     <style name="SwitchCompatStyle">
-        <item name="colorControlActivated">@color/light_green</item>
+        <item name="colorControlActivated">@color/brown</item>
+        <item name="colorControlNormal">@color/brown</item>
+        <item name="colorSwitchThumbNormal">@color/brown</item>
         <item name="android:textOff">OFF</item>
         <item name="android:textOn">ON</item>
         <item name="android:switchMinWidth">150dp</item>
         <item name="android:colorBackground">@color/white</item>
-        <item name="android:color">@color/white</item>
-        <item name="android:fillColor">@color/white</item>
+        <item name="android:color">@color/brown</item>
+        <item name="android:fillColor">@color/brown</item>
         <item name="android:radius">0.04dp</item>
     </style>
 
@@ -21,16 +23,16 @@
     </style>
 
     <style name="SpinnerTextStyle">
-        <item name="android:textSize">25dp</item>
-        <item name="android:fontFamily">@font/yakumopreschoolhand</item>
+        <item name="android:textSize">18dp</item>
+        <item name="android:fontFamily">@font/comforta</item>
         <item name="android:letterSpacing">0.1</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/brown</item>
     </style>
 
     <style name="SwitchCompatTextStyle">
-        <item name="android:textSize">4dp</item>
-        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textSize">8dp</item>
+        <item name="android:textColor">@color/white</item>
     </style>
     <style name="spinnerItemStyle" parent="android:Widget.TextView.SpinnerItem">
     </style>

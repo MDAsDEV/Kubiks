@@ -9,10 +9,6 @@
     android:background="@drawable/background_pink_settings"
     tools:context=".settings">
 
-
-
-
-
     <Spinner
         android:id="@+id/spinner_language"
         android:layout_width="wrap_content"
@@ -26,19 +22,39 @@
         android:theme="@style/SpinnerTextStyle"
         android:spinnerMode="dialog"></Spinner>
 
+    <Spinner
+        android:id="@+id/spinner_choose_fone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/spinner_language"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/check_shape"
+        android:entries="@array/colors"
+        android:minWidth="170dp"
+        android:minHeight="35dp"
+        android:theme="@style/SpinnerTextStyle"
+        android:spinnerMode="dialog"></Spinner>
+
+
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/switch_sound"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:theme="@style/SwitchCompatStyle"
-        app:showText="true"
         android:layout_below="@+id/spinner_choose_fone"
         android:layout_alignRight="@+id/spinner_language"
-        app:switchTextAppearance="@style/SwitchCompatTextStyle"
-        app:track="@drawable/switch_track"
+        android:layout_centerInParent="true"
         android:layout_marginTop="50dp"
-        />
+        android:minWidth="50dp"
+        android:textOff="OFF"
+        android:textOn="ON"
+        android:scaleX="1.2"
+        android:theme="@style/SwitchCompatStyle"
+        app:showText="true"
+        app:switchTextAppearance="@style/SwitchCompatTextStyle"
+        app:track="@drawable/switch_track" />
+
+
 
     <TextView
         android:id="@+id/textview_sound"
@@ -49,37 +65,44 @@
         android:layout_centerVertical="true"
         android:layout_marginTop="50dp"
         android:layout_toLeftOf="@id/switch_sound"
-        android:fontFamily="@font/yakumopreschoolhand"
+        android:fontFamily="@font/comforta"
         android:text="SOUND"
-        android:letterSpacing="0.1"
+        android:letterSpacing="0.12"
         android:textColor="@color/brown"
-        android:textSize="25dp"
+        android:textSize="20dp"
         android:textStyle="bold"></TextView>
 
-    <Spinner
-        android:id="@+id/spinner_choose_fone"
+    <!--
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/spinner_language"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
-        android:background="@drawable/check_shape"
-        android:entries="@array/colors"
-        android:minWidth="170dp"
-        android:minHeight="35dp"
-        android:theme="@style/SpinnerTextStyle"
-        android:spinnerMode="dialog"
-        ></Spinner>
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="30dp"
+        android:text="TEXT"
+        ></TextView>
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:src="@drawable/home_rectangle_settings"
+        ></ImageButton>
+       -->
+
 
     <ImageButton
         android:id="@+id/homeBackButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:background="@null"
         android:scaleType="fitCenter"
         android:scaleX="0.5"
         android:scaleY="0.5"
-        app:srcCompat="@drawable/home_button_current_color"></ImageButton>
+        app:srcCompat="@drawable/home_button_border_rus"></ImageButton>
+
 
 </RelativeLayout>
