@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Kubiks</string>
+    <string name="app_name">Dices</string>
     <string name="count_dice">Количество кубиков:</string>
     <string name="oneone">TODO</string>
     <string name="twotwo">TODO</string>

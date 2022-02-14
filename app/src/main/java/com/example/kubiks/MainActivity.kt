@@ -14,10 +14,10 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
+import androidx.multidex.MultiDex
 
 
 class MainActivity : AppCompatActivity() {
-
     private lateinit var prefs: SharedPreferences
     private lateinit var prefs_language: SharedPreferences
     private val APP_PREFERENCES_COUNTER = "counter"
@@ -29,6 +29,7 @@ class MainActivity : AppCompatActivity() {
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        MultiDex.install(this);
         setContentView(R.layout.activity_main)
         prefs =
             getSharedPreferences("settings", Context.MODE_PRIVATE)

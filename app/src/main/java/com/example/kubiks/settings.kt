@@ -1,4 +1,5 @@
 package com.example.kubiks
+import android.accessibilityservice.GestureDescription
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -23,10 +24,10 @@ import android.widget.Toast
 import java.util.Timer
 import kotlin.concurrent.schedule
 import android.widget.ArrayAdapter
-
-
-
-
+import com.google.android.gms.ads.AdListener
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.LoadAdError
 
 
 class settings : AppCompatActivity() {
@@ -41,6 +42,7 @@ class settings : AppCompatActivity() {
     private lateinit var prefs_language: SharedPreferences
     lateinit var spinner_object: Spinner
     lateinit var SpinnerLanguage: Spinner
+    private lateinit var mAdView: AdView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
@@ -51,9 +53,39 @@ class settings : AppCompatActivity() {
         val LayoutSettings = findViewById<RelativeLayout>(R.id.settings_layout)
         val AllColors = resources.getStringArray(R.array.colors)
         val AllLanguages = resources.getStringArray(R.array.languages)
+
+
+        mAdView = findViewById(R.id.adView)
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
+        mAdView.adListener = object: AdListener() {
+            override fun onAdLoaded() {
+                // Code to be executed when an ad finishes loading.
+            }
+
+            override fun onAdFailedToLoad(adError : LoadAdError) {
+                // Code to be executed when an ad request fails.
+            }
+
+            override fun onAdOpened() {
+                // Code to be executed when an ad opens an overlay that
+                // covers the screen.
+            }
+
+            override fun onAdClicked() {
+                // Code to be executed when the user clicks on an ad.
+            }
+
+            override fun onAdClosed() {
+                // Code to be executed when the user is about to return
+                // to the app after tapping on an ad.
+            }
+        }
+
+
         if (prefs_sound.contains(SOUND_PREFERENCES_MODE)) {
             is_mute_sound = prefs_sound.getBoolean(SOUND_PREFERENCES_MODE, false)
-            Log.i("test music preferences", is_mute_sound.toString())
+            Log.i("test music preёferences", is_mute_sound.toString())
         }
         if (prefs_background.contains(BACKGROUND_PREFERENCE_MODE)){
             val color_background = prefs_background.getString(BACKGROUND_PREFERENCE_MODE, "None")
