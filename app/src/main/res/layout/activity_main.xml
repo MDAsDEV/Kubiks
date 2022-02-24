@@ -41,9 +41,11 @@
         android:id="@+id/one_only"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
         android:layout_above="@id/strelka_left"
+        android:adjustViewBounds="true"
         android:layout_toRightOf="@id/invisible_view"
-        app:srcCompat="@drawable/transparent_1_dice" ></ImageView>
+        app:srcCompat="@drawable/transparent_1_dice"></ImageView>
     <View
         android:id="@+id/invisible_view"
         android:layout_width="1dp"
@@ -70,10 +72,10 @@
         android:id="@+id/light_2_dices_write"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
         android:layout_alignParentBottom="true"
-
-        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="11dp"
+        android:layout_marginBottom="5dp"
         android:layout_toLeftOf="@id/invisible_view_bottom"
         android:adjustViewBounds="true"
         app:srcCompat="@drawable/transparent_2_dices"></ImageView>

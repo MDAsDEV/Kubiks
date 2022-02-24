@@ -18,7 +18,6 @@ import android.widget.RelativeLayout
 import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_one_cubik.*
 import kotlinx.android.synthetic.main.activity_two_kubiks.*
-import kotlinx.android.synthetic.main.testdp.*
 import kotlin.random.Random
 
 class two_kubiks : AppCompatActivity() {

@@ -8,6 +8,7 @@
         <entry key="..\:/Users/m.bushmakin/StudioProjects/Kubiks/app/src/main/res/drawable/black_border.xml" value="0.19583333333333333" />
         <entry key="..\:/Users/m.bushmakin/StudioProjects/Kubiks/app/src/main/res/drawable/check_shape.xml" value="0.1" />
         <entry key="..\:/Users/m.bushmakin/StudioProjects/Kubiks/app/src/main/res/drawable/home_rectangle_settings.xml" value="0.1" />
+        <entry key="..\:/Users/m.bushmakin/StudioProjects/Kubiks/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
         <entry key="..\:/Users/m.bushmakin/StudioProjects/Kubiks/app/src/main/res/drawable/item_triangle.xml" value="0.19583333333333333" />
         <entry key="..\:/Users/m.bushmakin/StudioProjects/Kubiks/app/src/main/res/drawable/switch_thum.xml" value="0.19583333333333333" />
         <entry key="..\:/Users/m.bushmakin/StudioProjects/Kubiks/app/src/main/res/drawable/switch_thum_off.xml" value="0.19583333333333333" />
@@ -15,7 +16,7 @@
         <entry key="..\:/Users/m.bushmakin/StudioProjects/Kubiks/app/src/main/res/drawable/switch_track.xml" value="0.19583333333333333" />
         <entry key="..\:/Users/m.bushmakin/StudioProjects/Kubiks/app/src/main/res/drawable/switch_track_off.xml" value="0.19583333333333333" />
         <entry key="..\:/Users/m.bushmakin/StudioProjects/Kubiks/app/src/main/res/drawable/switch_track_on.xml" value="0.19583333333333333" />
-        <entry key="..\:/Users/m.bushmakin/StudioProjects/Kubiks/app/src/main/res/layout/activity_main.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/m.bushmakin/StudioProjects/Kubiks/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/m.bushmakin/StudioProjects/Kubiks/app/src/main/res/layout/activity_one_cubik.xml" value="0.1" />
         <entry key="..\:/Users/m.bushmakin/StudioProjects/Kubiks/app/src/main/res/layout/activity_second.xml" value="0.1" />
         <entry key="..\:/Users/m.bushmakin/StudioProjects/Kubiks/app/src/main/res/layout/activity_settings.xml" value="0.1" />
@@ -27,6 +28,8 @@
         <entry key="..\:/Users/m.bushmakin/StudioProjects/Kubiks/app/src/main/res/layout/spinner_fone.xml" value="0.1" />
         <entry key="..\:/Users/m.bushmakin/StudioProjects/Kubiks/app/src/main/res/layout/spinner_text.xml" value="0.15353260869565216" />
         <entry key="..\:/Users/m.bushmakin/StudioProjects/Kubiks/app/src/main/res/layout/switch_track.xml" value="0.15353260869565216" />
+        <entry key="..\:/Users/m.bushmakin/StudioProjects/Kubiks/app/src/main/res/layout/testactivitysettings.xml" value="0.1" />
+        <entry key="..\:/Users/m.bushmakin/StudioProjects/Kubiks/app/src/main/res/layout/testdp.xml" value="0.1" />
         <entry key="..\:/Users/m.bushmakin/StudioProjects/Kubiks/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
         <entry key="..\:/Users/m.bushmakin/StudioProjects/Kubiks/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1" />
       </map>

@@ -8,13 +8,15 @@ import android.os.Bundle
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
+import android.view.ViewGroup
 import android.view.WindowManager
 import android.view.animation.AnimationUtils
 import android.widget.ImageButton
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isVisible
 import androidx.multidex.MultiDex
+import android.widget.LinearLayout
+import androidx.core.view.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -34,6 +36,8 @@ class MainActivity : AppCompatActivity() {
         prefs =
             getSharedPreferences("settings", Context.MODE_PRIVATE)
         var ClickView = findViewById<ImageView>(R.id.click)
+        var OneKubikTitle = findViewById<ImageView>(R.id.one_only)
+        var TwoKubikTitle = findViewById<ImageView>(R.id.light_2_dices_write)
         prefs_language = getSharedPreferences("language_settings", MODE_PRIVATE)
         if (prefs_language.contains(LANGUAGE_PREFERENCE_MODE)){
             language_data = prefs_language.getString(LANGUAGE_PREFERENCE_MODE, "None").toString()
@@ -47,9 +51,13 @@ class MainActivity : AppCompatActivity() {
         }
         if ("eng" in language_data){
             ClickView.setImageResource(R.drawable.click_buttons_to_start)
+            OneKubikTitle.setImageResource(R.drawable.transparent_1_dice)
+            TwoKubikTitle.setImageResource(R.drawable.transparent_2_dices)
         }
         else{
             ClickView.setImageResource(R.drawable.click_buttons_to_start_rus)
+            OneKubikTitle.setImageResource(R.drawable.one_kubik_rus)
+            TwoKubikTitle.setImageResource(R.drawable.two_kubiks_rus)
         }
         val start_phone = findViewById(R.id.click) as ImageView;
         start_phone.setOnTouchListener(object : View.OnTouchListener {
@@ -87,6 +95,18 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
+
+    fun View.setMargins(
+        left: Int = this.marginLeft,
+        top: Int = this.marginTop,
+        right: Int = this.marginRight,
+        bottom: Int = this.marginBottom,
+    ) {
+        layoutParams = (layoutParams as ViewGroup.MarginLayoutParams).apply {
+            setMargins(left, top, right, bottom)
+        }
+    }
+
     fun counter_plus(){
         was_first_screen += 1 // Изменяем число при нажатии на экран
         if (was_first_screen > 0) {
