@@ -8,6 +8,12 @@
     android:id="@+id/settings_layout"
     android:background="@drawable/background_pink_settings"
     tools:context=".settings">
+    <!--ca-app-pub-3940256099942544/6300978111 test
+    -->
+
+    <!--ca-app-pub-9535083940475501/4861147118 prod
+    -->
+
 
     <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
         android:id="@+id/adView"
@@ -16,7 +22,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         ads:adSize="BANNER"
-        ads:adUnitId="ca-app-pub-3940256099942544/6300978111"></com.google.android.gms.ads.AdView>
+        ads:adUnitId="ca-app-pub-9535083940475501/4861147118"></com.google.android.gms.ads.AdView>
 
     <Spinner
         android:id="@+id/spinner_language"

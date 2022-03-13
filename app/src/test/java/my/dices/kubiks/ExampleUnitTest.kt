@@ -1,4 +1,4 @@
-package com.example.kubiks
+package my.dices.kubiks
 
 import org.junit.Test
 

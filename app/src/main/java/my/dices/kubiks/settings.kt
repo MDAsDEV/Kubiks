@@ -1,28 +1,19 @@
-package com.example.kubiks
-import android.accessibilityservice.GestureDescription
-import android.content.Context
+package my.dices.kubiks
 import android.content.Intent
 import android.content.SharedPreferences
-import android.graphics.Paint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import android.provider.ContactsContract
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
-import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.*
 import androidx.appcompat.widget.SwitchCompat
-import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_settings.*
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
-import android.widget.Toast
-import java.util.Timer
-import kotlin.concurrent.schedule
 import android.widget.ArrayAdapter
 import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
@@ -89,7 +80,6 @@ class settings : AppCompatActivity() {
         }
         if (prefs_background.contains(BACKGROUND_PREFERENCE_MODE)){
             val color_background = prefs_background.getString(BACKGROUND_PREFERENCE_MODE, "None")
-            Log.i("test color background ", color_background)
         }
         if (prefs_language.contains(LANGUAGE_PREFERENCE_MODE)){
             language_data = prefs_language.getString(LANGUAGE_PREFERENCE_MODE, "None").toString()

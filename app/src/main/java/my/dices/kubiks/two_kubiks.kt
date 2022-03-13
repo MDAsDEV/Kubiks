@@ -1,4 +1,4 @@
-package com.example.kubiks
+package my.dices.kubiks
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -59,7 +59,6 @@ class two_kubiks : AppCompatActivity() {
             Log.i("language data == ", language_data)
             Log.i("language data is english == ", is_english.toString())
             val color_background = prefs_background.getString(BACKGROUND_PREFERENCE_MODE, "None")
-            Log.i("test color background ", color_background)
             if (color_background == "Зеленый"){
                 TwoKubiksLayout.setBackgroundResource(R.drawable.background_salad)
                 TwoKubiksSettingsButton.setImageResource(R.drawable.settings_green_transparent)
@@ -613,7 +612,6 @@ class two_kubiks : AppCompatActivity() {
         prefs_background = getSharedPreferences("background_settings", Context.MODE_PRIVATE)
         if (prefs_background.contains(BACKGROUND_PREFERENCE_MODE)) {
             val color_background = prefs_background.getString(BACKGROUND_PREFERENCE_MODE, "None")
-            Log.i("test color background ", color_background)
             return color_background.toString()
         }
         return ""

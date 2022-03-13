@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.kubiks">
+    package="my.dices.kubiks">
 
     <application
         android:name="androidx.multidex.MultiDexApplication"
@@ -10,13 +10,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".settings">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".settings"
+            android:screenOrientation="nosensor"/>
         <activity android:name=".SecondActivity" />
         <activity
             android:name=".two_kubiks"

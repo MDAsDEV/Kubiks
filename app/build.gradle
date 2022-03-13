@@ -6,14 +6,22 @@ apply plugin: 'kotlin-android-extensions'
 
 
 android {
-    compileSdkVersion 29
+    signingConfigs {
+        release {
+            storeFile file('C:\\Users\\m.bushmakin\\Desktop\\Work\\OwnProjects\\Android\\Кубики\\key.jks')
+            storePassword 'Buyvol909'
+            keyAlias 'key0'
+            keyPassword 'Buyvol909'
+        }
+    }
+    compileSdkVersion 30
     buildToolsVersion "29.0.2"
     defaultConfig {
-        applicationId "com.example.kubiks"
+        applicationId "my.dices.kubiks"
         minSdkVersion 21
-        targetSdkVersion 29
-        versionCode 1
-        versionName "1.0"
+        targetSdkVersion 30
+        versionCode 2
+        versionName "2.0"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -21,6 +29,10 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            signingConfig signingConfigs.debug
+            debuggable true
         }
     }
     compileOptions {

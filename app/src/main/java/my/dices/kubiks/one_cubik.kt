@@ -1,9 +1,8 @@
-package com.example.kubiks
+package my.dices.kubiks
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import android.media.Image
 import android.media.MediaPlayer
 import android.media.SoundPool
 import android.media.SoundPool.OnLoadCompleteListener
@@ -57,8 +56,8 @@ class one_cubik : AppCompatActivity(), OnLoadCompleteListener {
                 is_english = ("eng" in language_data)
             }
             Log.i("language data now == ", language_data)
-            val color_background = prefs_background.getString(BACKGROUND_PREFERENCE_MODE, "None")
-            Log.i("test colorba_one kubik ", color_background)
+            val color_background = prefs_background.getString(BACKGROUND_PREFERENCE_MODE, "None").toString()
+            Log.i("test color background found ==  ", color_background)
             if (color_background == "Зеленый"){
                 OneKubiksLayout.setBackgroundResource(R.drawable.background_salad)
                 OneKubiksSettings.setImageResource(R.drawable.settings_green_transparent)
@@ -120,6 +119,9 @@ class one_cubik : AppCompatActivity(), OnLoadCompleteListener {
                 )
             }
         }
+        else{
+            Log.i("test color background not found", "error")
+        }
 
         val button_id = findViewById<ImageButton>(R.id.pbutton) as ImageButton
         if (!was) {
@@ -171,6 +173,7 @@ class one_cubik : AppCompatActivity(), OnLoadCompleteListener {
         return (el)
     }
     fun change_img_one(CurrentColor: String){
+        Log.i("test colors == ", CurrentColor.toString())
         if (CurrentColor == "Зеленый") {
             imageView.setImageDrawable(
                 ContextCompat.getDrawable(
@@ -205,6 +208,7 @@ class one_cubik : AppCompatActivity(), OnLoadCompleteListener {
         }
     }
     fun change_img_two(CurrentColor: String){
+
         if (CurrentColor == "Зеленый") {
             imageView.setImageDrawable(
                 ContextCompat.getDrawable(
@@ -375,17 +379,22 @@ class one_cubik : AppCompatActivity(), OnLoadCompleteListener {
         }
     }
     fun get_color(): String {
-        prefs_background = getSharedPreferences("background_settings", Context.MODE_PRIVATE)
+        prefs_background = getSharedPreferences("background_settings", MODE_PRIVATE)
         if (prefs_background.contains(BACKGROUND_PREFERENCE_MODE)) {
             val color_background = prefs_background.getString(BACKGROUND_PREFERENCE_MODE, "None")
-            Log.i("test color background ", color_background)
             return color_background.toString()
+        }
+        else
+        {
+            Log.i("test background prefs", "Background settings not found")
         }
         return ""
     }
     fun lets_play(){
         val nom: Int = rand_one()
+        Log.i("test dices == ", nom.toString())
         val CurrentColor: String = get_color()
+        Log.i("test colors == ", CurrentColor.toString())
         when (rand_one()){
             1 -> change_img_one(CurrentColor)
             2 -> change_img_two(CurrentColor)
