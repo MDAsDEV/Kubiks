@@ -25,12 +25,15 @@ class settings : AppCompatActivity() {
     private val SOUND_PREFERENCES_MODE = "sound"
     private val BACKGROUND_PREFERENCE_MODE = "background"
     private val LANGUAGE_PREFERENCE_MODE = "language"
+    private val SHAKE_PREFERENCES_MODE = "shake"
     var language_data: String = "rus"
     var is_mute_sound: Boolean = false
+    var is_shake: Boolean = false
     var was = false
     private lateinit var prefs_sound: SharedPreferences
     private lateinit var prefs_background: SharedPreferences
     private lateinit var prefs_language: SharedPreferences
+    private lateinit var prefs_shake: SharedPreferences
     lateinit var spinner_object: Spinner
     lateinit var SpinnerLanguage: Spinner
     private lateinit var mAdView: AdView
@@ -40,8 +43,12 @@ class settings : AppCompatActivity() {
         prefs_sound = getSharedPreferences("sound_settings", MODE_PRIVATE)
         prefs_background = getSharedPreferences("background_settings" , MODE_PRIVATE)
         prefs_language = getSharedPreferences("language_settings", MODE_PRIVATE)
+        prefs_shake = getSharedPreferences("shake_settings",  MODE_PRIVATE)
         val SwitchSound: SwitchCompat = findViewById<SwitchCompat>(R.id.switch_sound)
+        val SwitchShake: SwitchCompat = findViewById<SwitchCompat>(R.id.switch_shake)
         val LayoutSettings = findViewById<RelativeLayout>(R.id.settings_layout)
+
+
         val AllColors = resources.getStringArray(R.array.colors)
         val AllLanguages = resources.getStringArray(R.array.languages)
 
@@ -78,6 +85,10 @@ class settings : AppCompatActivity() {
             is_mute_sound = prefs_sound.getBoolean(SOUND_PREFERENCES_MODE, false)
             Log.i("test music preёferences", is_mute_sound.toString())
         }
+        if (prefs_shake.contains(SHAKE_PREFERENCES_MODE)){
+            is_shake = prefs_shake.getBoolean(SHAKE_PREFERENCES_MODE, false)
+            Log.i("test shake preferences", is_shake.toString())
+        }
         if (prefs_background.contains(BACKGROUND_PREFERENCE_MODE)){
             val color_background = prefs_background.getString(BACKGROUND_PREFERENCE_MODE, "None")
         }
@@ -95,6 +106,8 @@ class settings : AppCompatActivity() {
         SwitchSound.setOnCheckedChangeListener { buttonView, isChecked ->
             change_sound_mode()
         }
+        SwitchShake.isChecked = is_shake
+        SwitchShake.setOnCheckedChangeListener { buttonView, isChecked -> change_shake_mode()}
 
         val button_back_id = findViewById<ImageButton>(R.id.homeBackButton) as ImageButton
         if (was == false) {
@@ -142,6 +155,8 @@ class settings : AppCompatActivity() {
             SpinnerLanguage.setSelection(0)
             var TextViewSound = findViewById<TextView>(R.id.textview_sound)
             TextViewSound.setText(R.string.sound_textview_rus)
+            var TextViewShake = findViewById<TextView>(R.id.textview_shake)
+            TextViewShake.setText("ТРЯСКА")
             SpinnerLanguage.prompt = "Выберите язык"
             Log.i("test spinner language == ", R.string.prompt_language_rus.toString())
             spinner_object.prompt = "Выберите цвет фона"
@@ -205,6 +220,17 @@ class settings : AppCompatActivity() {
         Log.i("language data == ", NewLang)
         val edit_language_prefs = prefs_language.edit()
         edit_language_prefs.putString(LANGUAGE_PREFERENCE_MODE, NewLang.toString()).apply()
+    }
+
+    fun change_shake_mode(){
+        if (prefs_shake.contains(SHAKE_PREFERENCES_MODE)){
+            is_shake = prefs_shake.getBoolean(SHAKE_PREFERENCES_MODE, false)
+            Log.i ("test shake sound == ", is_shake.toString())
+        }
+        is_shake = (1 - is_shake.compareTo(false)) == 1
+        Log.i ("test boolean shake tag == ", is_shake.toString())
+        val edit_shake_settings = prefs_shake.edit()
+        edit_shake_settings.putBoolean(SHAKE_PREFERENCES_MODE, is_shake).apply()
     }
 
     fun change_sound_mode(){

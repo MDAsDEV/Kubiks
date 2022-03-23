@@ -48,8 +48,8 @@
         android:entries="@array/colors"
         android:minWidth="170dp"
         android:minHeight="35dp"
-        android:theme="@style/SpinnerTextStyle"
-        android:spinnerMode="dialog"></Spinner>
+        android:spinnerMode="dialog"
+        android:theme="@style/SpinnerTextStyle"></Spinner>
 
 
     <androidx.appcompat.widget.SwitchCompat
@@ -119,5 +119,37 @@
         android:scaleY="0.5"
         app:srcCompat="@drawable/home_button_border_rus"></ImageButton>
 
+    <TextView
+        android:id="@+id/textview_shake"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textview_sound"
+        android:layout_alignLeft="@id/spinner_language"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="50dp"
+        android:layout_toLeftOf="@id/switch_sound"
+        android:fontFamily="@font/comforta"
+        android:text="SHAKE"
+        android:letterSpacing="0.12"
+        android:textColor="@color/brown"
+        android:textSize="20dp"
+        android:textStyle="bold"></TextView>
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/switch_shake"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/switch_sound"
+        android:layout_alignRight="@+id/spinner_language"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="50dp"
+        android:minWidth="50dp"
+        android:textOff="OFF"
+        android:textOn="ON"
+        android:scaleX="1.2"
+        android:theme="@style/SwitchCompatStyle"
+        app:showText="true"
+        app:switchTextAppearance="@style/SwitchCompatTextStyle"
+        app:track="@drawable/switch_track" />
 
 </RelativeLayout>

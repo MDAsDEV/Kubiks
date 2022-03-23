@@ -21,12 +21,15 @@ class MainActivity : AppCompatActivity() {
     private lateinit var prefs: SharedPreferences
     private lateinit var prefs_language: SharedPreferences
     private lateinit var prefs_background: SharedPreferences
+    private lateinit var prefs_shake: SharedPreferences
     private val APP_PREFERENCES_COUNTER = "counter"
     private val LANGUAGE_PREFERENCE_MODE = "language"
     private val BACKGROUND_PREFERENCE_MODE = "background"
+    private val SHAKE_PREFERENCE_MODE = "shake"
     private var was_first_screen: Int = 0
     var language_data: String = "eng"
     var background_data: String = "Голубой"
+    var shake_data: Boolean = true
     var was = false
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,6 +43,7 @@ class MainActivity : AppCompatActivity() {
         var TwoKubikTitle = findViewById<ImageView>(R.id.light_2_dices_write)
         prefs_language = getSharedPreferences("language_settings", MODE_PRIVATE)
         prefs_background = getSharedPreferences("background_settings", MODE_PRIVATE)
+        prefs_shake = getSharedPreferences("shake", MODE_PRIVATE)
         if (prefs_language.contains(LANGUAGE_PREFERENCE_MODE)){
             language_data = prefs_language.getString(LANGUAGE_PREFERENCE_MODE, "None").toString()
             Log.i("test language data = =", language_data)
@@ -52,12 +56,21 @@ class MainActivity : AppCompatActivity() {
         }
         if (prefs_background.contains(BACKGROUND_PREFERENCE_MODE)){
             background_data = prefs_background.getString(BACKGROUND_PREFERENCE_MODE, "None").toString()
-            Log.i("test background data found == ", background_data)
+            Log.i("test background data ", background_data)
         }
         else{
             Log.i("test background data", "not found but aplying")
             val prefs_background_edit = prefs_background.edit()
             prefs_background_edit.putString(BACKGROUND_PREFERENCE_MODE, "Голубой").apply()
+        }
+        if (prefs_shake.contains(SHAKE_PREFERENCE_MODE)){
+            shake_data = prefs_shake.getBoolean(SHAKE_PREFERENCE_MODE, false)
+            Log.i("test shake mode == ", shake_data.toString())
+        }
+        else{
+            Log.i("test shake data == ", "shake data not found")
+            val prefs_shake_edit = prefs_shake.edit()
+            prefs_shake_edit.putBoolean(SHAKE_PREFERENCE_MODE, true).apply()
         }
         if ("eng" in language_data){
             ClickView.setImageResource(R.drawable.click_buttons_to_start)

@@ -3,9 +3,12 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.hardware.Sensor
+import android.hardware.SensorManager
 import android.media.MediaPlayer
 import android.media.SoundPool
 import android.media.SoundPool.OnLoadCompleteListener
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.MotionEvent
@@ -14,6 +17,7 @@ import android.view.animation.Animation
 import android.view.animation.Animation.AnimationListener
 import android.view.animation.AnimationUtils
 import android.widget.*
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_one_cubik.*
@@ -32,16 +36,23 @@ class one_cubik : AppCompatActivity(), OnLoadCompleteListener {
     private val SOUND_PREFERENCES_MODE = "sound"
     private val BACKGROUND_PREFERENCE_MODE = "background"
     private val LANGUAGE_PREFERENCE_MODE = "language"
+    private val SHAKE_PREFERENCE_MODE = "shake"
     lateinit var language_data: String
     var is_mute_sound: Boolean = false
     private var is_english: Boolean = false
+    var shake_data: Boolean = true
     private lateinit var prefs_sound: SharedPreferences
     private lateinit var prefs_background: SharedPreferences
     private lateinit var prefs_language: SharedPreferences
+    private lateinit var prefs_shake: SharedPreferences
+    private var mSensorManager: SensorManager? = null
+    private var mAccelerometer: Sensor? = null
+    private var mShakeDetector: ShakeDetector? = null
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_one_cubik)
+        Log.i("test create == ", "creating one dice")
         val OneKubiksLayout = findViewById<RelativeLayout>(R.id.one_kubik_relative_layout_id)
         val OneKubiksPlayButton = findViewById<ImageButton>(R.id.pbutton)
         val OneKubiksSettings = findViewById<ImageButton>(R.id.settings_button)
@@ -50,6 +61,15 @@ class one_cubik : AppCompatActivity(), OnLoadCompleteListener {
         prefs_sound = getSharedPreferences("sound_settings", MODE_PRIVATE)
         prefs_background = getSharedPreferences("background_settings", MODE_PRIVATE)
         prefs_language = getSharedPreferences("language_settings", MODE_PRIVATE)
+        prefs_shake = getSharedPreferences("shake_settings", MODE_PRIVATE)
+        Log.i("test shake data contains == ", prefs_shake.contains(SHAKE_PREFERENCE_MODE).toString())
+        if (prefs_shake.contains(SHAKE_PREFERENCE_MODE)){
+            shake_data = prefs_shake.getBoolean(SHAKE_PREFERENCE_MODE, false)
+            if (shake_data){
+                initSensor()
+            }
+        }
+
         if (prefs_background.contains(BACKGROUND_PREFERENCE_MODE)){
             if (prefs_language.contains(LANGUAGE_PREFERENCE_MODE)){
                 language_data = prefs_language.getString(LANGUAGE_PREFERENCE_MODE, "None").toString()
@@ -406,7 +426,9 @@ class one_cubik : AppCompatActivity(), OnLoadCompleteListener {
     }
     fun play_sound(){
         mp.isLooping = false
+        val speed: Float = 1.3.toFloat()
         mp.setVolume(leftVolume.toFloat(), rightVolume.toFloat())
+        //mp.setPlaybackParams(mp.getPlaybackParams().setSpeed(speed));
         mp.start()
 
     }
@@ -482,13 +504,31 @@ class one_cubik : AppCompatActivity(), OnLoadCompleteListener {
         val intent_setting = Intent(this, settings::class.java)
         startActivity(intent_setting)
     }
-
+    override fun onPause() { // Add the following line to unregister the Sensor Manager onPause
+        if (prefs_shake.contains(SHAKE_PREFERENCE_MODE)) {
+            shake_data = prefs_shake.getBoolean(SHAKE_PREFERENCE_MODE, false)
+            if (shake_data) {
+                mSensorManager!!.unregisterListener(mShakeDetector)
+            }
+        }
+        super.onPause()
+    }
     override fun onStart() {
         super.onStart()
         Log.i("Volume Level == ", leftVolume.toString() + ' ' + rightVolume.toString())
     }
     override fun onResume() { // Функция, запускающаяся при включении приложения
         super.onResume()
+        if (prefs_shake.contains(SHAKE_PREFERENCE_MODE)) {
+            shake_data = prefs_shake.getBoolean(SHAKE_PREFERENCE_MODE, false)
+            if (shake_data){
+                mSensorManager!!.registerListener(
+                    mShakeDetector,
+                    mAccelerometer,
+                    SensorManager.SENSOR_DELAY_UI
+                )
+            }
+        }
         Log.i("check event", "on resume event")
         if (prefs_sound.contains(SOUND_PREFERENCES_MODE)){
             Log.i("check_event", "on resume event if 2")
@@ -505,6 +545,23 @@ class one_cubik : AppCompatActivity(), OnLoadCompleteListener {
             Log.i("Volume Level == ", leftVolume.toString() + ' ' + rightVolume.toString())
         }
 
+    }
+    private fun initSensor() {
+        // ShakeDetector initialization
+        // ShakeDetector initialization
+        mSensorManager = getSystemService(SENSOR_SERVICE) as SensorManager
+        mAccelerometer = mSensorManager!!.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
+        mShakeDetector = ShakeDetector()
+        mShakeDetector!!.setOnShakeListener(object : ShakeDetector.OnShakeListener {
+            override fun onShake(count: Int) { /*
+                 * The following method, "handleShakeEvent(count):" is a stub //
+                 * method you would use to setup whatever you want done once the
+                 * device has been shook.
+                 */
+                //Toast.makeText(this@one_cubik, count.toString(), Toast.LENGTH_SHORT).show()
+                scale_play()
+            }
+        })
     }
     override fun onLoadComplete(soundPool: SoundPool?, sampleId: Int, status: Int) {
         TODO("Not yet implemented")
