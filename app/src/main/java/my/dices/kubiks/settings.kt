@@ -128,6 +128,8 @@ class settings : AppCompatActivity() {
             button_back_id.setImageResource(R.drawable.home_button_border_eng)
             SwitchSound.textOff = "OFF"
             SwitchSound.textOn = "ON"
+            SwitchShake.textOff = "OFF"
+            SwitchShake.textOn = "ON"
             var DataColors = resources.getStringArray(R.array.colors_eng)
             Log.i("data DATA eng == ", DataColors.toString())
             var DataArrayAdapter = ArrayAdapter.createFromResource(this, R.array.colors_eng,
@@ -146,6 +148,8 @@ class settings : AppCompatActivity() {
             button_back_id.setImageResource(R.drawable.home_button_border_rus)
             SwitchSound.textOff = "ВЫКЛ"
             SwitchSound.textOn = "ВКЛ"
+            SwitchShake.textOff = "ВЫКЛ"
+            SwitchShake.textOn = "ВКЛ"
             var Data = resources.getStringArray(R.array.colors)
             Log.i("data DATA rus == ", Data.toString())
             var DataArrayAdapter = ArrayAdapter.createFromResource(this, R.array.colors,
