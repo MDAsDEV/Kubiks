@@ -432,7 +432,7 @@ class one_cubik : AppCompatActivity(), OnLoadCompleteListener {
         mp.start()
 
     }
-    fun scale_play(){
+    /*fun scale_play(){
         if (!mp.isPlaying) {
             play_sound()
             was = true
@@ -468,7 +468,18 @@ class one_cubik : AppCompatActivity(), OnLoadCompleteListener {
             was = false
             Log.i("test", "start function")
         }
+    }*/
+    fun scale_play(){
+            play_sound()
+            was = true
+            val image: ImageView = findViewById(R.id.pbutton)
+            val animation =
+                AnimationUtils.loadAnimation(this, R.anim.scale_anim)
+            image.startAnimation(animation)
+            val animation_empty = AnimationUtils.loadAnimation(this, R.anim.scale_empty)
+            lets_play()
     }
+
     fun scale_back(){
         was = true
         val image: ImageView = findViewById(R.id.bbutton)
