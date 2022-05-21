@@ -54,6 +54,7 @@ class two_kubiks : AppCompatActivity() {
         val TwoKubiksBackButton = findViewById<ImageButton>(R.id.bbutton)
         val TwoKubiksImageViewDown = findViewById<ImageView>(R.id.imageViewdown)
         val TwoKubiksImageViewUp = findViewById<ImageView>(R.id.imageViewup)
+        val ViewAllScreenPlay = findViewById<View>(R.id.view_all_play_screen)
         //val TwoKubiksBackButton = findViewById<ImageButton>(R.id.)
         prefs_sound = getSharedPreferences("sound_settings", Context.MODE_PRIVATE)
         prefs_background = getSharedPreferences("background_settings" ,Context.MODE_PRIVATE)
@@ -154,10 +155,10 @@ class two_kubiks : AppCompatActivity() {
             }
         }
         if (was == false) {
-            button_id.setOnTouchListener(object : View.OnTouchListener {
+            ViewAllScreenPlay.setOnTouchListener(object : View.OnTouchListener {
                 override fun onTouch(v: View?, event: MotionEvent?): Boolean {
                     when (event?.action){
-                        MotionEvent.ACTION_DOWN -> scale_play()
+                        MotionEvent.ACTION_DOWN -> scale_play_simple()
                     }
                     return v?.onTouchEvent(event) ?: true
                 }
@@ -675,6 +676,11 @@ class two_kubiks : AppCompatActivity() {
             override fun onAnimationRepeat(animation: Animation) {}
         })
     }
+    fun scale_play_simple(){
+        play_sound()
+        lets_play_two_cubes()
+        was = true
+    }
     fun scale_play(){
         if (!mp.isPlaying) {
             play_sound()
@@ -785,7 +791,7 @@ class two_kubiks : AppCompatActivity() {
                  * device has been shook.
                  */
                 //Toast.makeText(this@one_cubik, count.toString(), Toast.LENGTH_SHORT).show()
-                scale_play()
+                scale_play_simple()
             }
         })
     }

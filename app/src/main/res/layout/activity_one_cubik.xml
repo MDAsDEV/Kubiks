@@ -58,6 +58,12 @@
         android:contentDescription="@string/onedice"
         app:srcCompat="@drawable/diceth_blue" />
 
+    <View
+        android:id="@+id/view_all_play_screen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/settings_button"
+        ></View>
 
 
 

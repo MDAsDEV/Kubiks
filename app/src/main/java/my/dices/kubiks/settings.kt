@@ -15,10 +15,9 @@ import kotlinx.android.synthetic.main.activity_settings.*
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.ArrayAdapter
-import com.google.android.gms.ads.AdListener
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.AdView
-import com.google.android.gms.ads.LoadAdError
+import com.yandex.mobile.ads.banner.AdSize
+import com.yandex.mobile.ads.banner.BannerAdView
+import com.yandex.mobile.ads.common.AdRequest
 
 
 class settings : AppCompatActivity() {
@@ -36,7 +35,7 @@ class settings : AppCompatActivity() {
     private lateinit var prefs_shake: SharedPreferences
     lateinit var spinner_object: Spinner
     lateinit var SpinnerLanguage: Spinner
-    private lateinit var mAdView: AdView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
@@ -52,33 +51,13 @@ class settings : AppCompatActivity() {
         val AllColors = resources.getStringArray(R.array.colors)
         val AllLanguages = resources.getStringArray(R.array.languages)
 
-
-        mAdView = findViewById(R.id.adView)
+        val banner = findViewById<BannerAdView>(R.id.banner_settings)
+        banner.setAdUnitId("R-M-1611044-1")
+        banner.setAdSize(AdSize.BANNER_320x50)
+        Log.i("test advertisement == ", "test ad")
         val adRequest = AdRequest.Builder().build()
-        mAdView.loadAd(adRequest)
-        mAdView.adListener = object: AdListener() {
-            override fun onAdLoaded() {
-                // Code to be executed when an ad finishes loading.
-            }
-
-            override fun onAdFailedToLoad(adError : LoadAdError) {
-                // Code to be executed when an ad request fails.
-            }
-
-            override fun onAdOpened() {
-                // Code to be executed when an ad opens an overlay that
-                // covers the screen.
-            }
-
-            override fun onAdClicked() {
-                // Code to be executed when the user clicks on an ad.
-            }
-
-            override fun onAdClosed() {
-                // Code to be executed when the user is about to return
-                // to the app after tapping on an ad.
-            }
-        }
+        banner.loadAd(adRequest)
+        Log.i("test advertisement == ", "ad uploaded")
 
 
         if (prefs_sound.contains(SOUND_PREFERENCES_MODE)) {
@@ -120,10 +99,10 @@ class settings : AppCompatActivity() {
                 }
             })
         }
-        Log.i("check error creating activity7", "Succesfull")
+        Log.i("check error creating acti", "Succesfull")
         spinner_object = findViewById<Spinner>(R.id.spinner_choose_fone)
         SpinnerLanguage = findViewById<Spinner>(R.id.spinner_language)
-        Log.i("language data check error == ", language_data)
+        Log.i("language data check error ", language_data)
         if ("eng" in language_data){
             button_back_id.setImageResource(R.drawable.home_button_border_eng)
             SwitchSound.textOff = "OFF"
@@ -139,9 +118,9 @@ class settings : AppCompatActivity() {
             spinner_object.adapter = DataArrayAdapter
             SpinnerLanguage.prompt = "Choose Language"
             SpinnerLanguage.setSelection(1)
-            Log.i("test spinner language eng == ", R.string.prompt_language_eng.toString())
+            Log.i("test spinner language eng ", R.string.prompt_language_eng.toString())
             spinner_object.prompt = "Choose background color"
-            Log.i("test spinner phone eng == ", R.string.prompt_phone_eng.toString())
+            Log.i("test spinner phone eng ", R.string.prompt_phone_eng.toString())
         }
         else
         {
@@ -162,14 +141,14 @@ class settings : AppCompatActivity() {
             var TextViewShake = findViewById<TextView>(R.id.textview_shake)
             TextViewShake.setText("ТРЯСКА")
             SpinnerLanguage.prompt = "Выберите язык"
-            Log.i("test spinner language == ", R.string.prompt_language_rus.toString())
+            Log.i("test spinner language ", R.string.prompt_language_rus.toString())
             spinner_object.prompt = "Выберите цвет фона"
-            Log.i("test phone language == ", R.string.prompt_phone_rus.toString())
+            Log.i("test phone language ", R.string.prompt_phone_rus.toString())
         }
         if (prefs_background.contains(BACKGROUND_PREFERENCE_MODE)){
             val color_background = prefs_background.getString(BACKGROUND_PREFERENCE_MODE, "None")
             val color_background_id = AllColors.indexOf(color_background)
-            Log.i("color background id == ", color_background_id.toString())
+            Log.i("color background id ", color_background_id.toString())
             spinner_object.setSelection(color_background_id)
         }
         var check: Int = 0
@@ -178,7 +157,7 @@ class settings : AppCompatActivity() {
                 parent: AdapterView<*>?,
                 itemSelected: View, selectedItemPosition: Int, selectedId: Long
             ) {
-                Log.i("Selected Item Poion == ", selectedItemPosition.toString())
+                Log.i("Selected Item Poion", selectedItemPosition.toString())
                 val CurrentBackgroundColor = AllColors.get(selectedItemPosition)
 
                 changeBackgroundMode(CurrentBackgroundColor)
@@ -194,7 +173,7 @@ class settings : AppCompatActivity() {
                 itemSelected: View, selectedItemPosition: Int, selectedId: Long
             )
             {
-                    Log.i("Selected Item language == ", selectedItemPosition.toString())
+                    Log.i("Selected Item languag", selectedItemPosition.toString())
                         if (selectedItemPosition == 1) {
                         change_language_mode("eng")
                     }
@@ -232,7 +211,7 @@ class settings : AppCompatActivity() {
             Log.i ("test shake sound == ", is_shake.toString())
         }
         is_shake = (1 - is_shake.compareTo(false)) == 1
-        Log.i ("test boolean shake tag == ", is_shake.toString())
+        Log.i ("test boolean shake tag ", is_shake.toString())
         val edit_shake_settings = prefs_shake.edit()
         edit_shake_settings.putBoolean(SHAKE_PREFERENCES_MODE, is_shake).apply()
     }

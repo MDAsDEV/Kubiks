@@ -144,11 +144,12 @@ class one_cubik : AppCompatActivity(), OnLoadCompleteListener {
         }
 
         val button_id = findViewById<ImageButton>(R.id.pbutton) as ImageButton
+        val view_all_screen_play_button = findViewById<View>(R.id.view_all_play_screen) as View
         if (!was) {
-            button_id.setOnTouchListener(object : View.OnTouchListener {
+            view_all_screen_play_button.setOnTouchListener(object : View.OnTouchListener {
                 override fun onTouch(v: View?, event: MotionEvent?): Boolean {
                     when (event?.action){
-                        MotionEvent.ACTION_DOWN -> scale_play()//Do Something
+                        MotionEvent.ACTION_DOWN -> scale_play_simple()//Do Something
                     }
                     return v?.onTouchEvent(event) ?: true
                 }
@@ -432,8 +433,14 @@ class one_cubik : AppCompatActivity(), OnLoadCompleteListener {
         mp.start()
 
     }
-    /*fun scale_play(){
+    fun scale_play_simple(){
+        lets_play()
+        play_sound()
+        was = true
+    }
+    fun scale_play(){
         if (!mp.isPlaying) {
+            lets_play()
             play_sound()
             was = true
             val image: ImageView = findViewById(R.id.pbutton)
@@ -460,7 +467,7 @@ class one_cubik : AppCompatActivity(), OnLoadCompleteListener {
 
                 override fun onAnimationEnd(animation: Animation) {
                     Log.i("START", "here started")
-                    lets_play()
+
                 }
 
                 override fun onAnimationRepeat(animation: Animation) {}
@@ -468,7 +475,9 @@ class one_cubik : AppCompatActivity(), OnLoadCompleteListener {
             was = false
             Log.i("test", "start function")
         }
-    }*/
+    }
+    /*
+
     fun scale_play(){
             play_sound()
             was = true
@@ -479,7 +488,7 @@ class one_cubik : AppCompatActivity(), OnLoadCompleteListener {
             val animation_empty = AnimationUtils.loadAnimation(this, R.anim.scale_empty)
             lets_play()
     }
-
+        */
     fun scale_back(){
         was = true
         val image: ImageView = findViewById(R.id.bbutton)
@@ -570,7 +579,7 @@ class one_cubik : AppCompatActivity(), OnLoadCompleteListener {
                  * device has been shook.
                  */
                 //Toast.makeText(this@one_cubik, count.toString(), Toast.LENGTH_SHORT).show()
-                scale_play()
+                scale_play_simple()
             }
         })
     }
