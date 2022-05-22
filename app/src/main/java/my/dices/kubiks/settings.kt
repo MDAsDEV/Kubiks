@@ -7,6 +7,7 @@ import android.os.Handler
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
+import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.*
@@ -52,7 +53,7 @@ class settings : AppCompatActivity() {
         val AllLanguages = resources.getStringArray(R.array.languages)
 
         val banner = findViewById<BannerAdView>(R.id.banner_settings)
-        banner.setAdUnitId("R-M-1611044-1")
+        //banner.setAdUnitId("R-M-1611044-1")
         banner.setAdSize(AdSize.BANNER_320x50)
         Log.i("test advertisement == ", "test ad")
         val adRequest = AdRequest.Builder().build()
@@ -102,6 +103,8 @@ class settings : AppCompatActivity() {
         Log.i("check error creating acti", "Succesfull")
         spinner_object = findViewById<Spinner>(R.id.spinner_choose_fone)
         SpinnerLanguage = findViewById<Spinner>(R.id.spinner_language)
+        var DataLanguages = resources.getStringArray(R.array.languages)
+        SpinnerLanguage.adapter = SpinnerAdapterLangs(this, DataLanguages.toMutableList())
         Log.i("language data check error ", language_data)
         if ("eng" in language_data){
             button_back_id.setImageResource(R.drawable.home_button_border_eng)
@@ -111,13 +114,15 @@ class settings : AppCompatActivity() {
             SwitchShake.textOn = "ON"
             var DataColors = resources.getStringArray(R.array.colors_eng)
             Log.i("data DATA eng == ", DataColors.toString())
-            var DataArrayAdapter = ArrayAdapter.createFromResource(this, R.array.colors_eng,
-            R.layout.myspinner)
             var TextViewSound = findViewById<TextView>(R.id.textview_sound)
             TextViewSound.setText(R.string.sound_textview_eng)
-            spinner_object.adapter = DataArrayAdapter
+            spinner_object.adapter = SpinnerAdapter2(
+                this,
+                DataColors.toMutableList()
+            )
             SpinnerLanguage.prompt = "Choose Language"
             SpinnerLanguage.setSelection(1)
+            //Log.i("test size == ", spinner_object.layoutParams.widt)
             Log.i("test spinner language eng ", R.string.prompt_language_eng.toString())
             spinner_object.prompt = "Choose background color"
             Log.i("test spinner phone eng ", R.string.prompt_phone_eng.toString())
@@ -131,10 +136,10 @@ class settings : AppCompatActivity() {
             SwitchShake.textOn = "ВКЛ"
             var Data = resources.getStringArray(R.array.colors)
             Log.i("data DATA rus == ", Data.toString())
-            var DataArrayAdapter = ArrayAdapter.createFromResource(this, R.array.colors,
-                R.layout.myspinner)
-            DataArrayAdapter.setDropDownViewResource(R.layout.myspinner)
-            spinner_object.adapter = DataArrayAdapter
+            spinner_object.adapter = SpinnerAdapter2(
+                this,
+                Data.toMutableList()
+            )
             SpinnerLanguage.setSelection(0)
             var TextViewSound = findViewById<TextView>(R.id.textview_sound)
             TextViewSound.setText(R.string.sound_textview_rus)
