@@ -53,7 +53,7 @@ class settings : AppCompatActivity() {
         val AllLanguages = resources.getStringArray(R.array.languages)
 
         val banner = findViewById<BannerAdView>(R.id.banner_settings)
-        //banner.setAdUnitId("R-M-1611044-1")
+        banner.setAdUnitId("R-M-1611044-1")
         banner.setAdSize(AdSize.BANNER_320x50)
         Log.i("test advertisement == ", "test ad")
         val adRequest = AdRequest.Builder().build()
